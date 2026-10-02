@@ -1,0 +1,1430 @@
+/* ============================================================
+   Bastian & Vero, Wedding Invitation
+   Hand-coded recreation. Mobile-first, vanilla CSS.
+============================================================ */
+
+@font-face {
+  font-family: 'Sloop Script';
+  src: url('public/assets/fonts/sloop-script-regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-bg: #E7E2D5;
+  --color-green: #2F4743;
+  --color-green-deep: #23342F;
+  --color-cream: #FFFBF3;
+  --color-cream-soft: #F6ECD4;
+  --color-orange: #DF9B5C;
+  --color-orange-bright: #F27C29;
+  --color-text: #24261F;
+  --color-text-on-green: #FBF7EE;
+  --color-gold-label: #7A6524;
+  --color-yellow-soft: #F7DF9C;
+
+  --font-serif: 'Times New Roman', Times, Georgia, serif;
+  --font-script: 'Sloop Script', 'Brush Script MT', cursive;
+
+  --content-max: 430px;
+  --shadow-soft: 0 18px 40px rgba(20, 26, 20, 0.18);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-serif);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  /* Clip stray horizontal bleed at the true document root, not on
+     .invitation itself — overflow on that inner element would create
+     its own scroll container and break position:sticky inside it
+     (used by the polaroid galleries and, at desktop widths, the hero
+     panel image). */
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+
+.script { font-family: var(--font-script); font-weight: 400; }
+
+/* ============================================================
+   Cover (opening screen)
+============================================================ */
+
+/* Locks the page behind the cover until it's opened. */
+body.is-cover-open { overflow: hidden; }
+
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 2rem 1.25rem;
+  background: var(--color-bg);
+  text-align: center;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+.cover.is-opened {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.cover__inner {
+  width: 100%;
+  max-width: 430px;
+  margin: auto;
+}
+
+.cover__eyebrow {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: clamp(0.9rem, 4vw, 1.05rem);
+  color: var(--color-green);
+  margin: 0;
+}
+.cover__title {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--color-orange-bright);
+  font-size: clamp(3rem, 17vw, 4.6rem);
+  line-height: 1.15;
+  margin: 0;
+  white-space: nowrap;
+}
+.cover__date {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: clamp(0.95rem, 4.2vw, 1.15rem);
+  color: var(--color-green);
+  margin: 0 0 1.25rem;
+}
+
+/* Envelope with the calla lilies tucked over its lower-left corner. */
+.cover__art {
+  position: relative;
+  width: 82%;
+  margin: 0 auto 1.25rem;
+}
+.cover__envelope { width: 100%; }
+.cover__lily {
+  position: absolute;
+  left: -16%;
+  bottom: 1%;
+  width: 42%;
+  pointer-events: none;
+}
+
+.cover__dear {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 1rem;
+  color: var(--color-green);
+  margin: 0;
+}
+.cover__guest {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.4rem, 6vw, 1.75rem);
+  color: var(--color-orange-bright);
+  line-height: 1.2;
+  margin: 0.1rem 0 0.2rem;
+}
+.cover__invite {
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: clamp(0.85rem, 3.8vw, 1rem);
+  color: var(--color-green);
+  margin: 0 0 1.5rem;
+}
+
+.cover__open {
+  display: inline-block;
+  width: 72%;
+  max-width: 300px;
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-orange-bright);
+  color: #fff;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1rem, 4.6vw, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(242, 124, 41, 0.3);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.cover__open:hover { background: #DD6A1A; }
+.cover__open:active { transform: translateY(1px); }
+.cover__open:focus-visible { outline: 2px solid var(--color-green); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cover { transition: none; }
+}
+
+/* ============================================================
+   Layout shell
+============================================================ */
+
+.page {
+  display: block;
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+.hero-panel { display: none; }
+
+.phone-frame {
+  width: 100%;
+}
+
+.invitation {
+  position: relative;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  background-color: var(--color-bg);
+  background-image: url('public/assets/background-toile.webp');
+  background-repeat: repeat;
+  background-size: 540px auto;
+  /* Trims decorations that bleed past the column's sides (e.g. the
+     wishes leaf). `clip`, unlike `hidden`, doesn't make this a scroll
+     container, so position: sticky inside (Our Story) keeps working. */
+  overflow-x: clip;
+}
+
+/* ============================================================
+   Buttons / pills
+============================================================ */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.7em 1.6em;
+  line-height: 1;
+}
+
+.pill--dark {
+  background: var(--color-green);
+  color: var(--color-text-on-green);
+}
+.pill--dark:hover { background: var(--color-green-deep); }
+
+.pill--cream {
+  background: var(--color-cream);
+  color: var(--color-green);
+}
+
+.pill--instagram {
+  background: var(--color-orange-bright);
+  color: #fff;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 1rem;
+}
+
+/* ============================================================
+   Hero
+============================================================ */
+
+.hero {
+  position: relative;
+  padding: 2.75rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.hero__title {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--color-orange);
+  font-size: clamp(2.6rem, 11vw, 3.4rem);
+  margin: 0 0 1.75rem;
+  line-height: 1;
+}
+
+.envelope-art {
+  position: relative;
+  width: 96%;
+  max-width: 390px;
+  margin: 0 auto;
+}
+
+.envelope-art__composite {
+  width: 100%;
+  height: auto;
+}
+
+.hero__peony {
+  width: 26%;
+  max-width: 130px;
+  margin: -1rem 0 0 2%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   Couple intro
+============================================================ */
+
+.intro {
+  position: relative;
+  padding: 0 1.25rem 2rem;
+}
+
+.couple {
+  position: relative;
+  padding: 6rem 0.25rem 3.5rem;
+}
+
+.couple__intro {
+  position: relative;
+  z-index: 1;
+  color: var(--color-text-on-green);
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.45;
+  margin: 0 0 2rem;
+  padding: 0 1rem;
+}
+
+.couple__plaque {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+}
+.couple__plaque-top,
+.couple__plaque-bottom {
+  width: 100%;
+  display: block;
+  flex: 0 0 auto;
+}
+.couple__plaque-mid {
+  width: 100%;
+  height: 100%;
+  flex: 1 1 auto;
+  object-fit: fill;
+  display: block;
+}
+
+.couple__person {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.75rem;
+}
+.couple__person .pill--instagram {
+  font-size: 0.8rem;
+  padding: 0.6em 1.1em;
+  gap: 0.4rem;
+}
+.couple__person .pill--instagram svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+.couple__person--reverse {
+  flex-direction: row-reverse;
+  text-align: right;
+  margin-top: -1rem;
+}
+
+.person-frame {
+  position: relative;
+  flex: 0 0 auto;
+  width: 12.5rem;
+  z-index: 2;
+}
+.person-frame img {
+  width: 100%;
+  display: block;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
+}
+.person-frame--bastian { margin-left: -1.5rem; }
+.person-frame--vero { margin-right: -1.5rem; }
+
+.couple__person-body {
+  flex: 1 1 auto;
+  color: var(--color-text-on-green);
+  min-width: 0;
+}
+
+.couple__name {
+  font-family: var(--font-script);
+  font-size: 2.4rem;
+  line-height: 1.15;
+  margin: 0 0 0.7rem;
+}
+
+.couple__parents {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0 0 0.9rem;
+}
+
+.couple__person--reverse .pill--instagram {
+  margin-left: auto;
+}
+
+.couple__divider {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-family: var(--font-script);
+  color: var(--color-text-on-green);
+  font-size: 3rem;
+  margin: 0 0 1.75rem;
+}
+
+/* ============================================================
+   Our Story (pinned scrollytelling section)
+============================================================ */
+
+.story {
+  position: relative;
+}
+
+/* Tall scroll track: its height is set from script.js so that scrolling
+   through it takes exactly enough distance to reveal every photo. */
+.story__track {
+  position: relative;
+}
+
+/* Carries its own copy of the page background so that, while the story
+   is pinned, the backdrop stays put with it instead of the toile
+   pattern continuing to scroll past underneath a transparent overlay. */
+.story__pin {
+  position: sticky;
+  top: 0;
+  /* Fills the whole screen while stuck, so only this background shows
+     (not this one plus the page's toile scrolling past below it). Its
+     pattern is lined up with the page's from script.js (initStory). */
+  min-height: 100vh;
+  padding: calc(1rem + 5vh) 1.25rem 2rem;
+  text-align: center;
+  background-color: var(--color-bg);
+  background-image: url('public/assets/background-toile.webp');
+  background-repeat: repeat;
+  background-size: 540px auto;
+}
+
+.story__heading {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--color-green);
+  font-size: clamp(2.6rem, 11vw, 3.2rem);
+  line-height: 1;
+  margin: 0 0 1rem;
+}
+
+/* Height is set from script.js (the tallest of the three chapters),
+   since the chapters inside are absolutely positioned for the crossfade
+   and so don't otherwise contribute to this container's height. */
+.story__chapters {
+  position: relative;
+  max-width: 320px;
+  margin: 0 auto 1.25rem;
+}
+
+/* top/left/right only (no `bottom`): with `bottom` set too, a child
+   would stretch to match this container's height, but that height is
+   itself auto (derived from the tallest child) — a circular dependency
+   that resolves to 0. Leaving `bottom` unset lets each chapter size to
+   its own content instead. */
+.story__chapter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.story__chapter.is-active { opacity: 1; }
+
+.story__chapter-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--color-green);
+  margin: 0 0 0.5rem;
+}
+
+.story__chapter-text {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* Height is set from script.js once the first photo's rendered size is
+   known, since photos are absolutely positioned (see .polaroid below)
+   and so don't contribute to this container's natural height. */
+.story__stack {
+  position: relative;
+  width: min(280px, 75vw);
+  margin: 0 auto;
+}
+
+.polaroid {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 100%;
+  background: #FFFDF8;
+  border: none;
+  border-radius: 10px;
+  padding: 0.65rem 0.65rem 1.5rem;
+  box-shadow: 0 30px 45px rgba(20, 26, 20, 0.22);
+  cursor: zoom-in;
+  text-align: center;
+  font: inherit;
+  color: inherit;
+  opacity: 0;
+  /* --rot and --peekx are set per card, at random, from script.js. */
+  transform: translate(calc(-50% + var(--peekx, 0px)), 60%) scale(0.92) rotate(var(--rot, 0deg));
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+}
+.polaroid.is-visible {
+  opacity: 1;
+  transform: translate(calc(-50% + var(--peekx, 0px)), 0) scale(1) rotate(var(--rot, 0deg));
+}
+.polaroid:active { transform: translate(calc(-50% + var(--peekx, 0px)), 0) scale(0.97) rotate(var(--rot, 0deg)); }
+.polaroid:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 3px; }
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 3px;
+  aspect-ratio: 12 / 7;
+  object-fit: cover;
+}
+
+.polaroid__caption {
+  display: block;
+  margin-top: 0.65rem;
+  font-family: var(--font-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+/* Respect prefers-reduced-motion: skip the pin/stack animation entirely
+   and lay everything out as a plain, fully visible, non-overlapping
+   vertical list (see initStory in script.js). */
+@media (prefers-reduced-motion: reduce) {
+  .story__track { height: auto !important; }
+  .story__pin { position: static; top: 0; }
+  .story__chapters { position: static; height: auto !important; margin-bottom: 2rem; }
+  .story__chapter {
+    position: static;
+    opacity: 1;
+    margin-bottom: 1.5rem;
+  }
+  .story__chapter:last-child { margin-bottom: 0; }
+  .story__stack {
+    position: static;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .polaroid {
+    position: static;
+    opacity: 1;
+    transition: none;
+    transform: rotate(var(--rot, 0deg)) !important;
+  }
+}
+
+/* ============================================================
+   Events
+============================================================ */
+
+.events {
+  position: relative;
+  padding: 1rem 1.25rem 2.5rem;
+}
+
+.event-card {
+  position: relative;
+  background: url('public/assets/card-curly.webp') center / 100% 100% no-repeat;
+  padding: 2.5rem 1.5rem 2.5rem 2.25rem;
+  margin-bottom: 2.25rem;
+  filter: drop-shadow(0 14px 20px rgba(30, 30, 20, 0.14));
+}
+.event-card:last-of-type { margin-bottom: 0; }
+
+.event-card__eyebrow {
+  font-family: var(--font-script);
+  color: var(--color-green);
+  text-align: center;
+  font-size: 2.6rem;
+  margin: 0 0 1rem;
+}
+
+.event-card__row {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.event-card__date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  min-width: 4.8rem;
+  text-align: center;
+}
+.event-card__day {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+}
+.event-card__num {
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-green);
+}
+.event-card__month {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+.event-card__time {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.event-card__divider {
+  width: 1px;
+  background: rgba(47, 71, 67, 0.25);
+}
+
+.event-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.6rem;
+}
+.event-card__info h2 {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-green);
+  margin: 0;
+  line-height: 1.25;
+}
+.event-card__info p {
+  font-size: 0.74rem;
+  margin: 0;
+  line-height: 1.4;
+}
+.event-card__info .pill { align-self: stretch; width: 100%; font-size: 0.75rem; padding: 0.65em 1.3em; }
+
+/* Tucked partly behind the Reception card's top-right corner: the
+   negative bottom margin pulls the card up over the hydrangea's lower
+   half, and z-index 1 (vs. the card's 2) keeps it behind. */
+.events__hydrangea {
+  width: 32%;
+  max-width: 150px;
+  margin: -2.5rem 4% -3.25rem auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Wraps just the Reception card + its leaves so the leaves' position
+   (below) is relative to the card alone, not the whole .events section. */
+.event-reception {
+  position: relative;
+  margin-bottom: 1.1rem;
+}
+.event-reception .event-card {
+  z-index: 2;
+}
+/* The leaves sit behind the card, tucked up so roughly their top third
+   hides behind its bottom edge, peeking out at the card's left side. */
+.events__leaves {
+  --leaf-width: 40%;
+  --leaf-top: 70%;
+  --leaf-left: -5%;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  top: var(--leaf-top);
+  left: var(--leaf-left);
+  width: var(--leaf-width);
+  max-width: 180px;
+}
+
+/* ============================================================
+   Gift
+============================================================ */
+
+.gift {
+  position: relative;
+  padding: 0.25rem 1.25rem 2.5rem;
+  text-align: center;
+}
+
+.gift__tray-wrap { position: relative; margin-top: 1rem; margin-bottom: 1.5rem; }
+.gift__tray { width: 100%; max-width: 300px; margin: 0 auto; }
+.gift__tagline {
+  position: absolute;
+  top: 50%;
+  left: 47.5%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-script);
+  color: var(--color-cream);
+  font-size: 1.3rem;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.gift__countdown {
+  position: absolute;
+  top: 38%;
+  left: 47.5%;
+  transform: translate(-50%, -50%);
+  width: 94%;
+  z-index: 1;
+}
+.gift__countdown-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.gift__countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 2.1rem;
+}
+.gift__countdown-num {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 6.8vw, 2.1rem);
+  color: var(--color-cream);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.gift__countdown-label {
+  font-size: 0.46rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-cream);
+  margin-top: 0.25rem;
+  white-space: nowrap;
+}
+.gift__countdown-sep {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 6.8vw, 2.1rem);
+  color: var(--color-cream);
+  line-height: 1;
+  margin: 0 0.05rem;
+}
+
+/* Overlaps the tray's top-right corner: the flower heads sit above the
+   tray's edge while the trailing stems hang down over it. */
+.gift__tray-bouquet {
+  --bouquet-width: 27%;
+  --bouquet-top: -10%;
+  --bouquet-right: -3%;
+  position: absolute;
+  top: var(--bouquet-top);
+  right: var(--bouquet-right);
+  width: var(--bouquet-width);
+  max-width: 78px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Overlaps the tray's bottom-left corner, petals allowed to bleed past
+   the edge of the screen on narrow viewports. */
+.gift__peony {
+  --peony-width: 34%;
+  --peony-bottom: -12%;
+  --peony-left: -8%;
+  position: absolute;
+  bottom: var(--peony-bottom);
+  left: var(--peony-left);
+  width: var(--peony-width);
+  max-width: 150px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.gift__plaque {
+  position: relative;
+  width: 94%;
+  max-width: 380px;
+  margin: 3rem auto 0;
+}
+.gift__plaque-bg { width: 100%; }
+.gift__plaque-content {
+  position: absolute;
+  top: 24%;
+  left: 10%;
+  width: 76%;
+  height: 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-on-green);
+  padding: 0 0.5rem;
+}
+.gift__title {
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  margin: 0 0 0.85rem;
+  transform: translateX(-0.35rem);
+}
+.gift__desc {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+}
+/* ============================================================
+   Gift modal
+============================================================ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+.modal[hidden] { display: none; }
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 28, 24, 0.55);
+}
+
+.modal__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 380px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--color-cream);
+  border-radius: 16px;
+  padding: 2rem 1.5rem 1.75rem;
+  text-align: center;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+}
+
+.modal__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background: rgba(47, 71, 67, 0.1);
+  color: var(--color-green);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal__panel h3 {
+  font-size: 1.9rem;
+  color: var(--color-green);
+  margin: 0 0 0.6rem;
+  font-weight: 400;
+}
+.modal__intro {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin: 0 0 1.5rem;
+}
+
+.bank-card {
+  background: rgba(47, 71, 67, 0.06);
+  border: 1px solid rgba(47, 71, 67, 0.2);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+.bank-card:last-child { margin-bottom: 0; }
+.bank-card__bank {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-green);
+  margin: 0 0 0.35rem;
+}
+.bank-card__number {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-text);
+  margin: 0 0 0.3rem;
+}
+.bank-card__holder {
+  font-size: 0.82rem;
+  margin: 0 0 0.9rem;
+  opacity: 0.85;
+}
+.bank-card__copy {
+  border: 1px solid var(--color-green);
+  background: transparent;
+  color: var(--color-green);
+  border-radius: 999px;
+  padding: 0.4em 1.3em;
+  font-size: 0.78rem;
+  font-family: var(--font-serif);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.bank-card__copy:hover { background: rgba(47, 71, 67, 0.08); }
+.bank-card__copy[data-copied] {
+  background: var(--color-green);
+  color: var(--color-text-on-green);
+}
+
+/* ============================================================
+   Photo lightbox
+============================================================ */
+
+.modal__panel--photo {
+  max-width: 400px;
+  padding: 1.75rem 1.25rem 1.5rem;
+}
+
+.modal__photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+  box-shadow: 0 10px 24px rgba(20, 26, 20, 0.22);
+}
+
+.modal__photo-caption {
+  margin: 0.9rem 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-green);
+}
+
+/* ============================================================
+   Verse
+============================================================ */
+
+.verse {
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+.verse__card {
+  position: relative;
+  background: url('public/assets/card-verse.webp') center / 100% 100% no-repeat;
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+  filter: drop-shadow(0 10px 18px rgba(30, 30, 20, 0.12));
+}
+.verse__seal {
+  position: absolute;
+  top: -1.2rem;
+  left: -0.8rem;
+  width: 3.5rem;
+  transform: rotate(-12deg);
+}
+.verse__text {
+  font-style: italic;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin: 0 0 1rem;
+}
+.verse__ref {
+  font-size: 0.86rem;
+  margin: 0;
+  color: var(--color-green);
+}
+
+/* ============================================================
+   RSVP
+============================================================ */
+
+.rsvp {
+  position: relative;
+  padding: 1rem 0.25rem 2rem;
+}
+
+.rsvp__composite {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  /* Lets .rsvp__card below size fluid text off this element's own
+     rendered width (cqw) rather than the browser viewport (vw) — the
+     two diverge here because this element is capped at 430px while
+     the viewport isn't, on both mobile (full-bleed up to the cap) and
+     especially desktop (a fixed 430px column inside a much wider page). */
+  container-type: inline-size;
+}
+.rsvp__composite-bg {
+  width: 100%;
+  display: block;
+}
+.rsvp__card {
+  position: absolute;
+  z-index: 1;
+  top: 24%;
+  left: 8%;
+  right: 14%;
+  bottom: 31%;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.1rem;
+  /* Shared size for every form control (label, input, select, textarea,
+     button) — kept as one variable so they can't drift apart. */
+  --form-font-size: 0.8rem;
+}
+@supports (container-type: inline-size) {
+  .rsvp__card { --form-font-size: clamp(0.6rem, 3.1cqw, 0.95rem); }
+}
+/* Each fluid property below is declared twice: a fixed rem fallback
+   first (used as-is by browsers without container query support, and
+   safe at every card size since it's tuned to the narrowest realistic
+   card), then a cqw-based clamp() that scales smoothly with the card's
+   own rendered width once that's supported — CSS simply ignores the
+   second declaration, unit and all, where it isn't understood.
+   Sized for the current envelope artwork's card area, which is
+   noticeably shorter relative to its canvas than the previous one. */
+/* Same size as the "Wedding Gift" title (.gift__title, 2.6rem) from
+   ~390px up; only shrinks on narrower phones so it still fits. */
+.rsvp__card h2 {
+  font-size: 2.6rem;
+  font-size: clamp(2rem, 10.9cqw, 2.6rem);
+  line-height: 1;
+  color: var(--color-green);
+  margin: 0 0 0.35rem;
+  padding-top: 0.5rem;
+  font-weight: 500;
+}
+.rsvp__card h2 .script {
+  font-size: 2.6rem;
+  font-size: clamp(2rem, 10.9cqw, 2.6rem);
+  display: block;
+  margin-top: 0.02rem;
+}
+/* Narrower than the card (unlike the heading above it), so it reads as
+   a short, centered blurb rather than spanning edge to edge. */
+.rsvp__card > p {
+  width: 86%;
+  margin: 0 auto 0.06rem;
+  font-size: 0.75rem;
+  font-size: clamp(0.6rem, 2.9cqw, 0.81rem);
+  line-height: 1.26;
+}
+
+/* Same width as the intro paragraph above it (.rsvp__card > p), so the
+   two line up. Sized to its own content and left to sit naturally
+   within .rsvp__card's fixed height (tied to the envelope artwork) —
+   no flex-grow/space-between pulling it to fill whatever room is left;
+   any leftover space just stays empty below it. */
+.rsvp__form {
+  display: flex;
+  flex-direction: column;
+  width: 86%;
+  margin: 0 auto;
+  padding-top: 0.5rem;
+  text-align: left;
+}
+.rsvp__field {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  margin-bottom: 0.4rem;
+}
+/* The wishes field sits directly above the button, which wants a
+   tighter, distinct gap rather than the general inter-field spacing. */
+.rsvp__field--last {
+  margin-bottom: 0.05rem;
+  margin-bottom: clamp(0.05rem, 0.5cqw, 0.3rem);
+}
+.rsvp__form label,
+.rsvp__form-label {
+  font-size: var(--form-font-size);
+  font-weight: 400;
+  color: var(--color-gold-label);
+  display: block;
+}
+.rsvp__form input,
+.rsvp__form select,
+.rsvp__form textarea {
+  font-family: var(--font-serif);
+  font-size: var(--form-font-size);
+  padding: 0.2em 0.5em;
+  border: 1px solid #EDE3C8;
+  border-radius: 10px;
+  background: var(--color-cream);
+  color: var(--color-text);
+  width: 100%;
+}
+.rsvp__form select {
+  background-color: var(--color-yellow-soft);
+  border-color: rgba(122, 101, 36, 0.18);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%237A6524' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7em center;
+  background-size: 0.7em auto;
+  padding-right: 2em;
+}
+.rsvp__form select option {
+  background: var(--color-cream);
+  color: var(--color-text);
+}
+.rsvp__form textarea {
+  min-height: 8px;
+  min-height: clamp(8px, 4cqw, 46px);
+  resize: none;
+}
+
+/* The RSVP submit button: the same orange as the Instagram buttons,
+   so it stands apart from the soft-yellow dropdowns above it. */
+.pill--gold {
+  background: var(--color-orange-bright);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  box-shadow: 0 4px 10px rgba(242, 124, 41, 0.3);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.pill--gold:hover { background: #DD6A1A; }
+.pill--gold:active { transform: translateY(1px); }
+.rsvp__form button {
+  flex: 0 0 auto;
+  width: 100%;
+  font-size: var(--form-font-size);
+  padding: 0.28em 1.5em;
+}
+.rsvp__status {
+  text-align: center;
+  margin: 0.5rem 0 0;
+  font-size: var(--form-font-size);
+  color: var(--color-green);
+}
+
+.wishes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 387px;
+  aspect-ratio: 700 / 1119;
+  margin: 2.5rem auto 3.5rem;
+  padding: 2.25rem 15px 1.5rem;
+  text-align: center;
+  /* Lets the heading size itself off this card's own width (cqw) so
+     "Wishes from loved ones" always fits on one line, instead of the
+     viewport width (vw) — the two diverge once .wishes stopped being
+     full-bleed (see width: 90% above). */
+  container-type: inline-size;
+}
+.wishes__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: 0;
+}
+/* Decorative corner leaf, now a standalone asset layered over the (now
+   leaf-free) paper texture — same bottom-right placement the baked-in
+   version used. Sits behind the wish text (z-index 0 vs. the list's 1)
+   so scrolled text would pass in front of it, matching the old art. */
+.wishes__leaf {
+  position: absolute;
+  z-index: 0;
+  right: -4%;
+  bottom: -11%;
+  width: 28.4%;
+  pointer-events: none;
+  transform: rotate(-41deg);
+}
+.wishes h3 {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  font-size: 2.4rem;
+  font-size: clamp(2.3rem, 13.5cqw, 3.4rem);
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 1.25rem;
+  white-space: nowrap;
+}
+/* A fixed, explicit scroll height — not flex-grow filling whatever
+   space is left in the card — so the scrollable area always matches
+   this box exactly, regardless of how much (or little) wish content
+   there is, and leaves the rest of the card's height empty below it. */
+.wishes__list {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  height: clamp(360px, 32vh, 340px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+  list-style: none;
+  margin: 0;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  text-align: left;
+}
+/* Thin, unobtrusive scrollbar on browsers that support styling it,
+   instead of the default chunky one. */
+.wishes__list {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(47, 71, 67, 0.3) transparent;
+}
+.wishes__list::-webkit-scrollbar { width: 6px; }
+.wishes__list::-webkit-scrollbar-track { background: transparent; }
+.wishes__list::-webkit-scrollbar-thumb {
+  background: rgba(47, 71, 67, 0.3);
+  border-radius: 999px;
+}
+.wishes__list li {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(47, 71, 67, 0.15);
+  padding-bottom: 0.8rem;
+}
+.wishes__list li strong { color: var(--color-green); display: block; margin-bottom: 0.2rem; }
+.wishes__empty {
+  text-align: center !important;
+  font-style: italic;
+  opacity: 0.7;
+  border-bottom: none !important;
+}
+
+/* ============================================================
+   Photo gallery
+============================================================ */
+
+.gallery {
+  padding: 1rem 0 2.5rem;
+  text-align: center;
+}
+.gallery h3 {
+  font-size: clamp(2.6rem, 11vw, 3.2rem);
+  font-weight: 400;
+  color: var(--color-green);
+  margin: 0 0 1.1rem;
+  padding: 0 1.25rem;
+}
+/* A horizontally scrolling strip, not a grid: each photo keeps its own
+   natural orientation (portrait or landscape) at a shared height rather
+   than being cropped to a uniform tile, so the row doesn't run long
+   down the page. */
+.gallery__grid {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  gap: 0.6rem;
+  padding: 0.25rem 1.25rem 0.75rem;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery__photo {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  height: clamp(180px, 45vw, 260px);
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: zoom-in;
+  scroll-snap-align: start;
+  box-shadow: 0 10px 20px rgba(20, 26, 20, 0.16);
+}
+.gallery__photo img {
+  height: 100%;
+  width: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.gallery__photo:hover img { transform: scale(1.05); }
+.gallery__photo:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Thank you / footer
+============================================================ */
+
+.thanks {
+  padding: 1.5rem 1.25rem 3rem;
+  text-align: center;
+}
+.thanks__card {
+  background: url('public/assets/card-verse.webp') center / 100% 100% no-repeat;
+  padding: 2.25rem 1.5rem;
+  filter: drop-shadow(0 10px 18px rgba(30, 30, 20, 0.12));
+}
+.thanks__title {
+  color: var(--color-green);
+  font-size: 2.6rem;
+  margin: 0 0 0.5rem;
+}
+.thanks__sub {
+  color: var(--color-green);
+  font-size: 1.4rem;
+  margin: 0;
+}
+.thanks__credit {
+  margin: 1.5rem 0 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+/* ============================================================
+   Desktop split layout (>=1024px)
+============================================================ */
+
+@media (min-width: 1024px) {
+  .page {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .hero-panel {
+    display: block;
+    flex: 1 1 auto;
+  }
+  .hero-panel__sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .hero-panel__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Show more of the couple (less sky). Much past ~75% and on very wide
+       screens their heads start running into the names/date above. */
+    object-position: 50% 62%;
+  }
+  .hero-panel__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      var(--color-bg) 0%,
+      rgba(231, 226, 213, 0.88) 20%,
+      rgba(231, 226, 213, 0.45) 36%,
+      rgba(231, 226, 213, 0) 52%);
+  }
+  .hero-panel__text {
+    position: absolute;
+    top: 9%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    text-align: center;
+  }
+  .hero-panel__eyebrow {
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 0.95rem;
+    color: var(--color-green);
+    margin: 0 0 0.9rem;
+  }
+  .hero-panel__title {
+    font-family: var(--font-script);
+    color: var(--color-orange);
+    font-size: clamp(3rem, 5.2vw, 4.75rem);
+    line-height: 1;
+    margin: 0 0 1.1rem;
+  }
+  .hero-panel__date {
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.95rem;
+    color: var(--color-green);
+    margin: 0;
+  }
+
+  .phone-frame {
+    flex: 0 0 var(--content-max);
+    display: flex;
+    justify-content: flex-end;
+    background: var(--color-green-deep);
+  }
+
+  .invitation {
+    box-shadow: var(--shadow-soft);
+    margin: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-panel__title { font-size: 4.75rem; }
+}
+
+/* ============================================================
+   Reduced motion / print
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}

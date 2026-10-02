@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bastian &amp; Vero | Wedding Invitation</title>
+<meta name="description" content="Bastian Lumbantoruan and Veronika Evelina are getting married. Join us for Holy Matrimony at GPIB Shalom Depok and the Wedding Reception at Bagas Raya Cibinong, Saturday 14 November 2026.">
+
+<meta property="og:title" content="Bastian & Vero | Wedding Invitation">
+<meta property="og:description" content="Two stories, one journey. Join Bastian and Vero as they begin their next chapter, Saturday 14 November 2026.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="public/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bastian & Vero | Wedding Invitation">
+<meta name="twitter:image" content="public/assets/og-image.jpg">
+
+<link rel="icon" type="image/png" sizes="32x32" href="public/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="public/assets/apple-touch-icon.png">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-cover-open">
+
+<!-- ===================== COVER (shown until "Click to Open") ===================== -->
+<div class="cover" id="cover" role="dialog" aria-modal="true" aria-labelledby="coverTitle">
+  <div class="cover__inner">
+    <p class="cover__eyebrow">The Wedding Of</p>
+    <h1 class="cover__title" id="coverTitle">Bastian &amp; Vero</h1>
+    <p class="cover__date">Saturday, 14 Nov 2026</p>
+
+    <div class="cover__art">
+      <img class="cover__envelope" src="public/assets/cover-envelope.webp" alt="A dark green envelope with lace trim, sealed with an orange BV wax seal">
+      <img class="cover__lily" src="public/assets/cover-lily.webp" alt="">
+    </div>
+
+    <p class="cover__dear">Dear,</p>
+    <p class="cover__guest" id="coverGuest">Honored Guest</p>
+    <p class="cover__invite">We invite you to our wedding</p>
+
+    <button class="cover__open" type="button" id="coverOpen">Click to Open</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- Desktop left panel: still hero image, pinned via position:sticky while the page scrolls -->
+  <aside class="hero-panel" aria-hidden="true">
+    <div class="hero-panel__sticky">
+      <img class="hero-panel__img" src="public/assets/hero-couple.webp" alt="" loading="eager">
+      <div class="hero-panel__overlay"></div>
+      <div class="hero-panel__text">
+        <p class="hero-panel__eyebrow">The Wedding Of</p>
+        <p class="hero-panel__title script">Bastian &amp; Vero</p>
+        <p class="hero-panel__date">Saturday, 14 November 2026</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Right / mobile column: the real, independently scrolling invitation -->
+  <div class="phone-frame">
+    <div class="invitation" id="invitation">
+
+      <!-- ===================== HERO ===================== -->
+      <header class="hero">
+        <h1 class="hero__title">Bastian &amp; Vero</h1>
+
+        <div class="envelope-art">
+          <img class="envelope-art__composite" src="public/assets/hero-envelope-composite.webp" alt="Bastian and Vero looking at each other under an open sky, tucked into an open envelope with calla lilies" loading="eager">
+        </div>
+
+        <img class="hero__peony" src="public/assets/flower-peony-peach.webp" alt="" loading="lazy">
+      </header>
+
+      <!-- ===================== COUPLE INTRO ===================== -->
+      <section class="intro" aria-label="About the couple">
+        <div class="couple">
+          <div class="couple__plaque" aria-hidden="true">
+            <img class="couple__plaque-top" src="public/assets/plaque-couple-top.webp" alt="" loading="lazy">
+            <img class="couple__plaque-mid" src="public/assets/plaque-couple-mid.webp" alt="" loading="lazy">
+            <img class="couple__plaque-bottom" src="public/assets/plaque-couple-bottom.webp" alt="" loading="lazy">
+          </div>
+
+          <p class="couple__intro">Two stories, one journey.<br>Before we begin the next chapter, let us<br>introduce ourselves.</p>
+
+          <div class="couple__person">
+            <div class="person-frame person-frame--bastian">
+              <img src="public/assets/frame-photo-bastian.webp" alt="Portrait of Bastian Lumbantoruan in a gold oval frame" loading="lazy">
+            </div>
+            <div class="couple__person-body">
+              <p class="couple__name">Bastian<br>Lumbantoruan</p>
+              <p class="couple__parents">Son of<br>Monang Lumbantoruan<br>and Esli Rolia Br.<br>Pangaribuan</p>
+              <a class="pill pill--instagram" href="https://www.instagram.com/baharibastian/" target="_blank" rel="noopener">
+                <svg viewBox="0 0 212.3 212.3" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M62.16.73c-11.29.53-19,2.34-25.74,4.98-6.98,2.72-12.89,6.36-18.77,12.27-5.89,5.91-9.51,11.83-12.2,18.82-2.61,6.76-4.38,14.47-4.88,25.77C.07,73.88-.04,77.49.01,106.31c.05,28.81.18,32.43.72,43.75.54,11.29,2.34,18.99,4.98,25.74,2.72,6.98,6.36,12.88,12.27,18.77,5.91,5.89,11.83,9.5,18.82,12.2,6.75,2.61,14.47,4.39,25.76,4.88,11.32.5,14.93.61,43.74.55,28.82-.05,32.43-.18,43.75-.72,11.29-.54,18.99-2.35,25.74-4.98,6.98-2.73,12.89-6.36,18.77-12.27,5.88-5.91,9.5-11.83,12.2-18.82,2.61-6.75,4.39-14.47,4.88-25.75.49-11.32.61-14.94.56-43.75-.05-28.81-.19-32.42-.72-43.74-.54-11.3-2.34-19-4.98-25.75-2.73-6.98-6.36-12.88-12.27-18.77-5.91-5.88-11.83-9.51-18.82-12.2-6.75-2.61-14.47-4.39-25.76-4.88C138.33.07,134.71-.04,105.9.01c-28.81.05-32.42.18-43.74.72M63.4,192.54c-10.34-.45-15.96-2.17-19.71-3.61-4.96-1.92-8.49-4.22-12.22-7.91-3.72-3.71-6.02-7.24-7.96-12.18-1.45-3.74-3.2-9.35-3.69-19.7-.53-11.18-.65-14.54-.7-42.87-.05-28.32.05-31.68.54-42.87.44-10.34,2.17-15.96,3.61-19.7,1.92-4.96,4.21-8.49,7.91-12.22,3.71-3.72,7.24-6.02,12.19-7.96,3.74-1.46,9.35-3.2,19.69-3.69,11.19-.53,14.54-.64,42.87-.7,28.33-.06,31.69.04,42.88.54,10.34.45,15.96,2.16,19.7,3.61,4.96,1.92,8.5,4.2,12.22,7.91,3.72,3.71,6.03,7.23,7.96,12.19,1.46,3.73,3.2,9.35,3.69,19.68.53,11.19.65,14.55.7,42.87.05,28.33-.05,31.69-.54,42.87-.45,10.34-2.17,15.97-3.61,19.71-1.92,4.95-4.21,8.49-7.92,12.21-3.71,3.71-7.23,6.02-12.19,7.96-3.73,1.46-9.35,3.2-19.68,3.69-11.19.53-14.54.65-42.88.7-28.32.05-31.68-.05-42.87-.54M149.9,49.39c.01,7.03,5.73,12.72,12.75,12.7,7.03-.01,12.72-5.72,12.71-12.75-.01-7.03-5.73-12.72-12.76-12.71-7.03.01-12.72,5.73-12.71,12.75M51.62,106.21c.06,30.09,24.5,54.43,54.58,54.37,30.09-.06,54.44-24.49,54.38-54.58-.06-30.08-24.5-54.43-54.59-54.38-30.08.06-54.43,24.5-54.37,54.59M70.73,106.17c-.03-19.53,15.77-35.4,35.3-35.43,19.53-.04,35.4,15.76,35.44,35.3.04,19.53-15.77,35.4-35.3,35.43-19.53.04-35.4-15.77-35.43-35.3"/></svg>
+                <span>@baharibastian</span>
+              </a>
+            </div>
+          </div>
+
+          <p class="couple__divider script" aria-hidden="true">&amp;</p>
+
+          <div class="couple__person couple__person--reverse">
+            <div class="person-frame person-frame--vero">
+              <img src="public/assets/frame-photo-vero.webp" alt="Portrait of Veronika Evelina in a gold oval frame" loading="lazy">
+            </div>
+            <div class="couple__person-body">
+              <p class="couple__name">Veronika<br>Evelina</p>
+              <p class="couple__parents">Daughter of<br>Sarton Sinambela (&dagger;)<br>and Dahlia Br. Hutahaean</p>
+              <a class="pill pill--instagram" href="https://www.instagram.com/verosinambela" target="_blank" rel="noopener">
+                <svg viewBox="0 0 212.3 212.3" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M62.16.73c-11.29.53-19,2.34-25.74,4.98-6.98,2.72-12.89,6.36-18.77,12.27-5.89,5.91-9.51,11.83-12.2,18.82-2.61,6.76-4.38,14.47-4.88,25.77C.07,73.88-.04,77.49.01,106.31c.05,28.81.18,32.43.72,43.75.54,11.29,2.34,18.99,4.98,25.74,2.72,6.98,6.36,12.88,12.27,18.77,5.91,5.89,11.83,9.5,18.82,12.2,6.75,2.61,14.47,4.39,25.76,4.88,11.32.5,14.93.61,43.74.55,28.82-.05,32.43-.18,43.75-.72,11.29-.54,18.99-2.35,25.74-4.98,6.98-2.73,12.89-6.36,18.77-12.27,5.88-5.91,9.5-11.83,12.2-18.82,2.61-6.75,4.39-14.47,4.88-25.75.49-11.32.61-14.94.56-43.75-.05-28.81-.19-32.42-.72-43.74-.54-11.3-2.34-19-4.98-25.75-2.73-6.98-6.36-12.88-12.27-18.77-5.91-5.88-11.83-9.51-18.82-12.2-6.75-2.61-14.47-4.39-25.76-4.88C138.33.07,134.71-.04,105.9.01c-28.81.05-32.42.18-43.74.72M63.4,192.54c-10.34-.45-15.96-2.17-19.71-3.61-4.96-1.92-8.49-4.22-12.22-7.91-3.72-3.71-6.02-7.24-7.96-12.18-1.45-3.74-3.2-9.35-3.69-19.7-.53-11.18-.65-14.54-.7-42.87-.05-28.32.05-31.68.54-42.87.44-10.34,2.17-15.96,3.61-19.7,1.92-4.96,4.21-8.49,7.91-12.22,3.71-3.72,7.24-6.02,12.19-7.96,3.74-1.46,9.35-3.2,19.69-3.69,11.19-.53,14.54-.64,42.87-.7,28.33-.06,31.69.04,42.88.54,10.34.45,15.96,2.16,19.7,3.61,4.96,1.92,8.5,4.2,12.22,7.91,3.72,3.71,6.03,7.23,7.96,12.19,1.46,3.73,3.2,9.35,3.69,19.68.53,11.19.65,14.55.7,42.87.05,28.33-.05,31.69-.54,42.87-.45,10.34-2.17,15.97-3.61,19.71-1.92,4.95-4.21,8.49-7.92,12.21-3.71,3.71-7.23,6.02-12.19,7.96-3.73,1.46-9.35,3.2-19.68,3.69-11.19.53-14.54.65-42.88.7-28.32.05-31.68-.05-42.87-.54M149.9,49.39c.01,7.03,5.73,12.72,12.75,12.7,7.03-.01,12.72-5.72,12.71-12.75-.01-7.03-5.73-12.72-12.76-12.71-7.03.01-12.72,5.73-12.71,12.75M51.62,106.21c.06,30.09,24.5,54.43,54.58,54.37,30.09-.06,54.44-24.49,54.38-54.58-.06-30.08-24.5-54.43-54.59-54.38-30.08.06-54.43,24.5-54.37,54.59M70.73,106.17c-.03-19.53,15.77-35.4,35.3-35.43,19.53-.04,35.4,15.76,35.44,35.3.04,19.53-15.77,35.4-35.3,35.43-19.53.04-35.4-15.77-35.43-35.3"/></svg>
+                <span>@verosinambela</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== OUR STORY ===================== -->
+      <section class="story" aria-label="Our love story">
+        <div class="story__track" data-story>
+          <div class="story__pin">
+            <h2 class="story__heading">Our Story</h2>
+
+            <div class="story__chapters">
+              <div class="story__chapter is-active" data-chapter="0">
+                <p class="story__chapter-title">chapter one: how we met</p>
+                <p class="story__chapter-text">April 2025, a mutual family connection brought us together, and something quiet began.</p>
+              </div>
+              <div class="story__chapter" data-chapter="1">
+                <p class="story__chapter-title">chapter two: falling in love</p>
+                <p class="story__chapter-text">Good mornings before work, good nights before sleep, and quiet walks where we found a home in each other.</p>
+              </div>
+              <div class="story__chapter" data-chapter="2">
+                <p class="story__chapter-title">chapter three: the next step</p>
+                <p class="story__chapter-text">Then, with the prayers and blessings of both families, we settled our hearts on one path toward marriage.</p>
+              </div>
+            </div>
+
+            <div class="story__stack">
+              <button class="polaroid" type="button" data-chapter="0" data-full="public/assets/love-story/love-story-01-noodle-place.webp" data-caption="First meet in this noodle place">
+                <img src="public/assets/love-story/love-story-01-noodle-place.webp" alt="Bastian and Vero's first meeting, over a bowl of noodles" loading="lazy">
+                <span class="polaroid__caption">First meet in this noodle place</span>
+              </button>
+              <button class="polaroid" type="button" data-chapter="0" data-full="public/assets/love-story/love-story-02-photobox.webp" data-caption="First photobox &#128517;">
+                <img src="public/assets/love-story/love-story-02-photobox.webp" alt="Bastian and Vero in a photobox strip, making faces at the camera" loading="lazy">
+                <span class="polaroid__caption">First photobox &#128517;</span>
+              </button>
+              <button class="polaroid" type="button" data-chapter="0" data-full="public/assets/love-story/love-story-03-start-of-us.webp" data-caption="The start of us">
+                <img src="public/assets/love-story/love-story-03-start-of-us.webp" alt="A quiet moment together, the start of us" loading="lazy">
+                <span class="polaroid__caption">The start of us</span>
+              </button>
+              <button class="polaroid" type="button" data-chapter="1" data-full="public/assets/love-story/love-story-04-night-walk.webp" data-caption="Our favorite activity, night walk">
+                <img src="public/assets/love-story/love-story-04-night-walk.webp" alt="Bastian and Vero holding hands on a night walk" loading="lazy">
+                <span class="polaroid__caption">Our favorite activity, night walk</span>
+              </button>
+              <button class="polaroid" type="button" data-chapter="1" data-full="public/assets/love-story/love-story-05-sushi-mania.webp" data-caption="She turns him into Sushi Mania">
+                <img src="public/assets/love-story/love-story-05-sushi-mania.webp" alt="A plate of sashimi, evidence of a shared sushi obsession" loading="lazy">
+                <span class="polaroid__caption">She turns him into Sushi Mania</span>
+              </button>
+              <button class="polaroid" type="button" data-chapter="1" data-full="public/assets/love-story/love-story-06-pelari-kalcer.webp" data-caption="He turns her into Pelari Kalcer">
+                <img src="public/assets/love-story/love-story-06-pelari-kalcer.webp" alt="Bastian and Vero holding up race medals after a run" loading="lazy">
+                <span class="polaroid__caption">He turns her into Pelari Kalcer</span>
+              </button>
+              <button class="polaroid" type="button" data-chapter="2" data-full="public/assets/love-story/love-story-07-heritage.webp" data-caption="Dressed in our heritage">
+                <img src="public/assets/love-story/love-story-07-heritage.webp" alt="Bastian and Vero dressed in traditional Batak clothing" loading="lazy">
+                <span class="polaroid__caption">Dressed in our heritage</span>
+              </button>
+              <button class="polaroid" type="button" data-chapter="2" data-full="public/assets/love-story/love-story-08-almost-there.webp" data-caption="Almost there">
+                <img src="public/assets/love-story/love-story-08-almost-there.webp" alt="Two hands reaching for each other, almost there" loading="lazy">
+                <span class="polaroid__caption">Almost there</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== EVENTS ===================== -->
+      <section class="events" aria-label="Wedding events">
+        <div class="event-card">
+          <p class="event-card__eyebrow">Holy Matrimony</p>
+          <div class="event-card__row">
+            <div class="event-card__date">
+              <span class="event-card__day">Saturday</span>
+              <span class="event-card__num">14</span>
+              <span class="event-card__month">Nov 2026</span>
+              <span class="event-card__time">8:30 WIB</span>
+            </div>
+            <div class="event-card__divider" aria-hidden="true"></div>
+            <div class="event-card__info">
+              <h2>GPIB Shalom<br>Depok</h2>
+              <p>Jl. Kembang Lio No.9,&nbsp;RT.3/RW.13, Beji, Depok</p>
+              <a class="pill pill--dark" href="https://maps.app.goo.gl/AY46JMTG9VC52QRq8" target="_blank" rel="noopener">View Maps</a>
+            </div>
+          </div>
+        </div>
+
+        <img class="events__hydrangea" src="public/assets/flower-hydrangea-green.webp" alt="" loading="lazy">
+
+        <div class="event-reception">
+          <div class="event-card">
+            <p class="event-card__eyebrow">Wedding Reception</p>
+            <div class="event-card__row">
+              <div class="event-card__date">
+                <span class="event-card__day">Saturday</span>
+                <span class="event-card__num">14</span>
+                <span class="event-card__month">Nov 2026</span>
+                <span class="event-card__time">11:30 WIB</span>
+              </div>
+              <div class="event-card__divider" aria-hidden="true"></div>
+              <div class="event-card__info">
+                <h2>Bagas Raya<br>Cibinong</h2>
+                <p>Jl. Raya Jakarta Bogor Km. 39, Ds. Pabuaran, Cibinong, Bogor</p>
+                <a class="pill pill--dark" href="https://maps.app.goo.gl/yymnwYHcG8vSEyw7A" target="_blank" rel="noopener">View Maps</a>
+              </div>
+            </div>
+          </div>
+          <img class="events__leaves" src="public/assets/leaves-heart-pair.webp" alt="" loading="lazy">
+        </div>
+      </section>
+
+      <!-- ===================== GIFT ===================== -->
+      <section class="gift" aria-label="Wedding gift">
+        <div class="gift__tray-wrap">
+          <img class="gift__tray" src="public/assets/tray-gold.webp" alt="" loading="lazy">
+          <div class="gift__countdown" id="countdown" aria-label="Countdown to the wedding day">
+            <div class="gift__countdown-row">
+              <div class="gift__countdown-unit">
+                <span class="gift__countdown-num" data-cd="days">00</span>
+                <span class="gift__countdown-label">Days</span>
+              </div>
+              <span class="gift__countdown-sep">:</span>
+              <div class="gift__countdown-unit">
+                <span class="gift__countdown-num" data-cd="hours">00</span>
+                <span class="gift__countdown-label">Hours</span>
+              </div>
+              <span class="gift__countdown-sep">:</span>
+              <div class="gift__countdown-unit">
+                <span class="gift__countdown-num" data-cd="minutes">00</span>
+                <span class="gift__countdown-label">Minutes</span>
+              </div>
+              <span class="gift__countdown-sep">:</span>
+              <div class="gift__countdown-unit">
+                <span class="gift__countdown-num" data-cd="seconds">00</span>
+                <span class="gift__countdown-label">Seconds</span>
+              </div>
+            </div>
+          </div>
+          <p class="gift__tagline">before the big day</p>
+          <img class="gift__tray-bouquet" src="public/assets/bouquet-love-story.webp" alt="" loading="lazy">
+          <img class="gift__peony" src="public/assets/flower-peony-peach.webp" alt="" loading="lazy">
+        </div>
+
+        <div class="gift__plaque">
+          <img class="gift__plaque-bg" src="public/assets/gift-tassel-tag.webp" alt="" loading="lazy">
+          <div class="gift__plaque-content">
+            <p class="gift__title">Wedding Gift</p>
+            <p class="gift__desc">Your prayers and presence are the greatest gift we could ask for. Should you wish to honour us with a gift, we&rsquo;ve left a few details here.</p>
+            <button class="pill pill--cream" type="button" id="giftBtn" aria-haspopup="dialog">Send a Gift</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== VERSE ===================== -->
+      <section class="verse" aria-label="Bible verse">
+        <div class="verse__card">
+          <img class="verse__seal" src="public/assets/wax-seal.webp" alt="" loading="lazy">
+          <p class="verse__text">Where you go, I go; and where you live, I&rsquo;ll live. Your people are my people, your God is my god; where you die, I&rsquo;ll die, and that&rsquo;s where I&rsquo;ll be buried, so help me God, not even death itself is going to come between us!</p>
+          <p class="verse__ref">Ruth 1:16-17 (MSG)</p>
+        </div>
+      </section>
+
+      <!-- ===================== RSVP ===================== -->
+      <section class="rsvp" aria-label="RSVP and wedding wishes">
+        <div class="rsvp__composite">
+          <img class="rsvp__composite-bg" src="public/assets/rsvp-composite.webp" alt="" loading="lazy">
+          <div class="rsvp__card">
+            <h2>RSVP &amp;<br><span class="script">Wedding Wishes</span></h2>
+            <p>We&rsquo;d love for you to be part of our celebration! Fill out the form below to let us know if you can make it.</p>
+
+            <form class="rsvp__form" id="rsvpForm">
+              <div class="rsvp__field">
+                <label for="rsvpName">Your name</label>
+                <input type="text" id="rsvpName" name="name" required autocomplete="name">
+              </div>
+
+              <div class="rsvp__field">
+                <label for="rsvpAttend">Will you be attending our wedding?</label>
+                <select id="rsvpAttend" name="attend" required>
+                  <option value="" disabled selected>Choose an option</option>
+                  <option value="yes">Joyfully accepts</option>
+                  <option value="no">Regretfully declines</option>
+                </select>
+              </div>
+
+              <div class="rsvp__field">
+                <label for="rsvpGuests">Number of guests</label>
+                <select id="rsvpGuests" name="guests" required>
+                  <option value="" disabled selected>Choose an option</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+
+              <div class="rsvp__field rsvp__field--last">
+                <label for="rsvpMessage">Your wishes</label>
+                <textarea id="rsvpMessage" name="message" rows="3" placeholder="Leave a wish for Bastian and Vero..."></textarea>
+              </div>
+
+              <button class="pill pill--gold" type="submit">RSVP</button>
+              <p class="rsvp__status" id="rsvpStatus" role="status" hidden></p>
+            </form>
+          </div>
+        </div>
+
+        <div class="wishes">
+          <img class="wishes__bg" src="public/assets/wishes-paper.webp" alt="" loading="lazy">
+          <img class="wishes__leaf" src="public/assets/leaf-anthurium-wishes.webp" alt="" loading="lazy">
+          <h3 class="script">Wishes from loved ones</h3>
+          <ul class="wishes__list" id="wishesList">
+            <li class="wishes__empty" id="wishesEmpty">Be the first to leave a wish above.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===================== PHOTO GALLERY ===================== -->
+      <section class="gallery" aria-label="Photo gallery">
+        <h3 class="script">Photo Gallery</h3>
+        <div class="gallery__grid">
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-08.webp">
+            <img src="public/assets/gallery/gallery-08.webp" alt="Bastian and Vero in the water together" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-09.webp">
+            <img src="public/assets/gallery/gallery-09.webp" alt="Bastian and Vero smiling on the beach" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-06.webp">
+            <img src="public/assets/gallery/gallery-06.webp" alt="Bastian and Vero sitting together on the sand by the sea, sharing a laugh" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-05.webp">
+            <img src="public/assets/gallery/gallery-05.webp" alt="Bastian and Vero close together at sunset" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-02.webp">
+            <img src="public/assets/gallery/gallery-02.webp" alt="Bastian and Vero laughing together by the sea" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-04.webp">
+            <img src="public/assets/gallery/gallery-04.webp" alt="Bastian and Vero walking along the shore" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-07.webp">
+            <img src="public/assets/gallery/gallery-07.webp" alt="Bastian and Vero candid moment on the beach" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-03.webp">
+            <img src="public/assets/gallery/gallery-03.webp" alt="Bastian and Vero portrait on the beach" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-01.webp">
+            <img src="public/assets/gallery/gallery-01.webp" alt="Bastian and Vero holding hands in the waves at the beach" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-10.webp">
+            <img src="public/assets/gallery/gallery-10.webp" alt="Bastian and Vero laughing together, holding hands and a bouquet of yellow and white flowers" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-11.webp">
+            <img src="public/assets/gallery/gallery-11.webp" alt="Bastian and Vero embracing on the beach" loading="lazy">
+          </button>
+          <button class="gallery__photo" type="button" data-full="public/assets/gallery/gallery-12.webp">
+            <img src="public/assets/gallery/gallery-12.webp" alt="Bastian and Vero portrait together outdoors" loading="lazy">
+          </button>
+        </div>
+      </section>
+
+      <!-- ===================== THANK YOU ===================== -->
+      <footer class="thanks">
+        <div class="thanks__card">
+          <p class="script thanks__title">Thank you!</p>
+          <p class="script thanks__sub">for your presences and blessings!</p>
+        </div>
+        <p class="thanks__credit">Bastian &amp; Vero &middot; 14 November 2026</p>
+      </footer>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== GIFT MODAL ===================== -->
+<div class="modal" id="giftModal" hidden>
+  <div class="modal__overlay" data-modal-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="giftModalTitle">
+    <button class="modal__close" type="button" data-modal-close aria-label="Close">&times;</button>
+    <h3 id="giftModalTitle" class="script">Wedding Gift</h3>
+    <p class="modal__intro">Your prayers and presence mean the world to us. If you would like to honour us with a gift, here are our details.</p>
+
+    <div class="bank-card">
+      <p class="bank-card__bank">Bank Name</p>
+      <p class="bank-card__number" data-copy-value="0000 0000 0000">0000 0000 0000</p>
+      <p class="bank-card__holder">Account Holder Name</p>
+      <button class="bank-card__copy" type="button" data-copy-btn>Copy Number</button>
+    </div>
+
+    <div class="bank-card">
+      <p class="bank-card__bank">Bank Name</p>
+      <p class="bank-card__number" data-copy-value="0000 0000 0000">0000 0000 0000</p>
+      <p class="bank-card__holder">Account Holder Name</p>
+      <button class="bank-card__copy" type="button" data-copy-btn>Copy Number</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PHOTO LIGHTBOX ===================== -->
+<div class="modal modal--photo" id="photoModal" hidden>
+  <div class="modal__overlay" data-modal-close></div>
+  <div class="modal__panel modal__panel--photo" role="dialog" aria-modal="true" aria-labelledby="photoModalCaption">
+    <button class="modal__close" type="button" data-modal-close aria-label="Close">&times;</button>
+    <img class="modal__photo" id="photoModalImg" src="" alt="">
+    <p class="modal__photo-caption" id="photoModalCaption"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

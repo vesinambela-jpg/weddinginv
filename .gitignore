@@ -1,0 +1,5 @@
+.DS_Store
+
+# Original full-size photos and design exports. The site only uses the
+# optimized copies in public/assets, so these stay local.
+Asset/
