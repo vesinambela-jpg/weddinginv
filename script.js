@@ -363,7 +363,12 @@
 
     var guest = new URLSearchParams(window.location.search).get('to');
     if (guest && guest.trim()) {
-      document.getElementById('coverGuest').textContent = guest.trim();
+      guest = guest.trim();
+      document.getElementById('coverGuest').textContent = guest;
+      // Pre-fill the RSVP name with the exact name from the guest list, so
+      // RSVP rows match the "List undangan" tab (its Attend? lookup).
+      var rsvpName = document.getElementById('rsvpName');
+      if (rsvpName && !rsvpName.value) rsvpName.value = guest;
     }
 
     btn.addEventListener('click', function () {
