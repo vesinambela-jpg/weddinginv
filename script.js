@@ -89,12 +89,22 @@
     var form = document.getElementById('rsvpForm');
     if (!form) return;
     var status = document.getElementById('rsvpStatus');
+    var guestsField = document.getElementById('rsvpGuestsField');
+
+    // "Number of guests" only applies to guests who are coming.
+    function syncGuests() {
+      var declined = form.attend.value === 'no';
+      guestsField.hidden = declined;
+      form.guests.required = !declined;
+      if (declined) form.guests.value = '';
+    }
+    form.attend.addEventListener('change', syncGuests);
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var name = form.name.value.trim();
       var attend = form.attend.value;
-      var guests = form.guests.value;
+      var guests = attend === 'no' ? '0' : form.guests.value;
       var message = form.message.value.trim();
       if (!name || !attend) return;
 
@@ -140,6 +150,9 @@
       }
 
       form.reset();
+      // Reset clears the locked name from the guest's link; put it back.
+      if (form.name.readOnly) form.name.value = form.name.defaultValue = name;
+      syncGuests();
       if (status) {
         status.hidden = false;
         status.textContent = attend === 'yes'
@@ -383,8 +396,12 @@
       document.getElementById('coverGuest').textContent = guestName;
       // Pre-fill the RSVP name with the exact name from the guest list, so
       // RSVP rows match the "List undangan" tab (its Attend? lookup).
+      // It's locked (read-only) so the RSVP always matches the invited guest.
       var rsvpName = document.getElementById('rsvpName');
-      if (rsvpName && !rsvpName.value) rsvpName.value = guestName;
+      if (rsvpName) {
+        rsvpName.value = rsvpName.defaultValue = guestName;
+        rsvpName.readOnly = true;
+      }
       status.hidden = true;
       retryBtn.hidden = true;
       greeting.hidden = false;

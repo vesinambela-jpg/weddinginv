@@ -1122,6 +1122,16 @@ body.is-cover-open { overflow: hidden; }
   color: var(--color-text);
   width: 100%;
 }
+/* The name comes from the guest's personal link and can't be changed. */
+.rsvp__form input[readonly] {
+  background: rgba(230, 218, 190, 0.35);
+  color: var(--color-green);
+  font-weight: 700;
+  cursor: default;
+}
+.rsvp__form input[readonly]:focus { outline: none; }
+/* Hidden when the guest declines ("Number of guests" doesn't apply). */
+.rsvp__field[hidden] { display: none; }
 .rsvp__form select {
   background-color: var(--color-yellow-soft);
   border-color: rgba(122, 101, 36, 0.18);
