@@ -354,29 +354,77 @@
     });
   }
 
-  // Opening cover: shows the guest's name from the link (?to=Name) and
-  // keeps the page locked until "Click to Open" is pressed.
+  // Opening cover. A guest link looks like ?to=<name>&k=<code>; the code is
+  // made by the Apps Script (GUEST_URL in the "List undangan" tab) from the
+  // name and a private key, so the cover asks the script to confirm it before
+  // letting anyone in. Edited names, missing codes or guests removed from
+  // the list get an error instead of the invitation.
   function initCover() {
     var cover = document.getElementById('cover');
-    var btn = document.getElementById('coverOpen');
-    if (!cover || !btn) return;
+    var openBtn = document.getElementById('coverOpen');
+    var retryBtn = document.getElementById('coverRetry');
+    var greeting = document.getElementById('coverGreeting');
+    var status = document.getElementById('coverStatus');
+    if (!cover || !openBtn) return;
 
-    var guest = new URLSearchParams(window.location.search).get('to');
-    if (guest && guest.trim()) {
-      guest = guest.trim();
-      document.getElementById('coverGuest').textContent = guest;
+    var params = new URLSearchParams(window.location.search);
+    var name = (params.get('to') || '').trim();
+    var code = (params.get('k') || '').trim();
+
+    function showStatus(message, canRetry) {
+      greeting.hidden = true;
+      openBtn.hidden = true;
+      status.textContent = message;
+      status.hidden = false;
+      retryBtn.hidden = !canRetry;
+    }
+
+    function welcome(guestName) {
+      document.getElementById('coverGuest').textContent = guestName;
       // Pre-fill the RSVP name with the exact name from the guest list, so
       // RSVP rows match the "List undangan" tab (its Attend? lookup).
       var rsvpName = document.getElementById('rsvpName');
-      if (rsvpName && !rsvpName.value) rsvpName.value = guest;
+      if (rsvpName && !rsvpName.value) rsvpName.value = guestName;
+      status.hidden = true;
+      retryBtn.hidden = true;
+      greeting.hidden = false;
+      openBtn.hidden = false;
     }
 
-    btn.addEventListener('click', function () {
+    function verify() {
+      if (!name || !code || !GOOGLE_SHEET_SCRIPT_URL) {
+        showStatus('Sorry, this invitation link isn\u2019t valid. Please open the exact link that was sent to you.', false);
+        return;
+      }
+      showStatus('Opening your invitation\u2026', false);
+      var url = GOOGLE_SHEET_SCRIPT_URL + '?action=verify&to=' + encodeURIComponent(name) +
+        '&k=' + encodeURIComponent(code);
+      fetch(url)
+        .then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(function (result) {
+          if (result && result.ok) {
+            welcome(result.name || name);
+          } else {
+            showStatus('Sorry, this invitation link isn\u2019t valid. Please open the exact link that was sent to you.', false);
+          }
+        })
+        .catch(function () {
+          showStatus('We couldn\u2019t open your invitation just now. Please check your connection and try again.', true);
+        });
+    }
+
+    retryBtn.addEventListener('click', verify);
+    openBtn.addEventListener('click', function () {
       window.scrollTo(0, 0);
       document.body.classList.remove('is-cover-open');
       cover.classList.add('is-opened');
       cover.setAttribute('aria-hidden', 'true');
     });
+
+    verify();
   }
 
   function initCountdown() {

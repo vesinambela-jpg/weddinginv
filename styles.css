@@ -166,9 +166,23 @@ body.is-cover-open { overflow: hidden; }
   box-shadow: 0 6px 14px rgba(242, 124, 41, 0.3);
   transition: background 0.2s ease, transform 0.1s ease;
 }
+.cover__open[hidden] { display: none; }
 .cover__open:hover { background: #DD6A1A; }
 .cover__open:active { transform: translateY(1px); }
 .cover__open:focus-visible { outline: 2px solid var(--color-green); outline-offset: 3px; }
+
+/* "Opening your invitation…" while the link is checked, or the message
+   shown when the link isn't valid. */
+.cover__status {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: clamp(0.9rem, 4vw, 1.05rem);
+  line-height: 1.5;
+  color: var(--color-green);
+  max-width: 300px;
+  margin: 0 auto 1.25rem;
+}
+.cover__status[hidden] { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .cover { transition: none; }

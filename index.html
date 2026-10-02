@@ -33,11 +33,17 @@
       <img class="cover__lily" src="public/assets/cover-lily.webp" alt="">
     </div>
 
-    <p class="cover__dear">Dear,</p>
-    <p class="cover__guest" id="coverGuest">Honored Guest</p>
-    <p class="cover__invite">We invite you to our wedding</p>
+    <!-- Shown once the personal link is verified against the guest list. -->
+    <div class="cover__greeting" id="coverGreeting" hidden>
+      <p class="cover__dear">Dear,</p>
+      <p class="cover__guest" id="coverGuest"></p>
+      <p class="cover__invite">We invite you to our wedding</p>
+    </div>
 
-    <button class="cover__open" type="button" id="coverOpen">Click to Open</button>
+    <p class="cover__status" id="coverStatus" role="status">Opening your invitation&hellip;</p>
+
+    <button class="cover__open" type="button" id="coverOpen" hidden>Click to Open</button>
+    <button class="cover__open" type="button" id="coverRetry" hidden>Try Again</button>
   </div>
 </div>
 
