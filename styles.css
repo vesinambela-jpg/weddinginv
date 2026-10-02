@@ -1332,22 +1332,58 @@ body.is-cover-open { overflow: hidden; }
 ============================================================ */
 
 .thanks {
-  padding: 1.5rem 1.25rem 3rem;
+  padding: 1.5rem 0 3rem;
   text-align: center;
 }
-.thanks__card {
-  background: url('public/assets/card-verse.webp') center / 100% 100% no-repeat;
-  padding: 2.25rem 1.5rem;
-  filter: drop-shadow(0 10px 18px rgba(30, 30, 20, 0.12));
+/* Cream card with a calla lily bouquet tucked over each side; the right
+   bouquet is the same image flipped. Sizes are % of this stage so the
+   composition scales as one piece. */
+.thanks__stage {
+  position: relative;
+  padding: 1.5rem 0;
+  /* Text sizes follow this stage's width (cqw), so desktop's fixed column
+     matches mobile exactly. */
+  container-type: inline-size;
 }
+.thanks__card {
+  position: relative;
+  z-index: 1;
+  width: 66%;
+  margin: 0 auto;
+  padding: 10cqw 4cqw 11cqw;
+  background: var(--color-cream);
+  box-shadow: 0 12px 26px rgba(30, 30, 20, 0.16);
+}
+/* Thin double border just inside the card's edge. */
+.thanks__card::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(47, 71, 67, 0.16);
+  box-shadow: 0 0 0 3px var(--color-cream), 0 0 0 4px rgba(47, 71, 67, 0.16);
+  pointer-events: none;
+}
+.thanks__bouquet {
+  position: absolute;
+  z-index: 2;
+  top: -3%;
+  width: 37%;
+  pointer-events: none;
+  filter: drop-shadow(4px 10px 10px rgba(30, 30, 20, 0.22));
+}
+.thanks__bouquet--left { left: -11%; }
+.thanks__bouquet--right { right: -11%; transform: scaleX(-1); }
 .thanks__title {
   color: var(--color-green);
-  font-size: 2.6rem;
-  margin: 0 0 0.5rem;
+  font-size: 13cqw;
+  line-height: 1.1;
+  white-space: nowrap;
+  margin: 0 0 0.6rem;
 }
 .thanks__sub {
   color: var(--color-green);
-  font-size: 1.4rem;
+  font-size: 8cqw;
+  line-height: 1.25;
   margin: 0;
 }
 .thanks__credit {
