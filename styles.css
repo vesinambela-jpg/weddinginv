@@ -383,8 +383,8 @@ body.is-cover-open { overflow: hidden; }
   display: block;
   filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
 }
-.person-frame--bastian { margin-left: -6cqw; }
-.person-frame--vero { margin-right: -6cqw; }
+.person-frame--bastian { margin-left: 0; }
+.person-frame--vero { margin-right: 0; }
 
 .couple__person-body {
   flex: 1 1 auto;
@@ -394,7 +394,7 @@ body.is-cover-open { overflow: hidden; }
 
 .couple__name {
   font-family: var(--font-script);
-  font-size: 9cqw;
+  font-size: 10.5cqw;
   line-height: 1.15;
   margin: 0 0 0.7rem;
 }
