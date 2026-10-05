@@ -4,16 +4,8 @@
 ============================================================ */
 
 @font-face {
-  font-family: 'Sloop Script';
-  src: url('public/assets/fonts/sloop-script-regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Sybaris Opti';
-  src: url('public/assets/fonts/sybaris-opti.otf') format('opentype');
+  font-family: 'Symphony';
+  src: url('public/assets/fonts/symphony-regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -33,7 +25,7 @@
   --color-yellow-soft: #F7DF9C;
 
   --font-serif: 'Times New Roman', Times, Georgia, serif;
-  --font-script: 'Sloop Script', 'Brush Script MT', cursive;
+  --font-script: 'Symphony', 'Brush Script MT', cursive;
 
   --content-max: 430px;
   --shadow-soft: 0 18px 40px rgba(20, 26, 20, 0.18);
@@ -727,16 +719,19 @@ body.is-cover-open { overflow: hidden; }
   text-align: center;
 }
 
-.gift__tray-wrap { position: relative; margin-top: 1rem; margin-bottom: 1.5rem; }
+.gift__tray-wrap { position: relative; margin-top: 1rem; margin-bottom: 1.5rem; container-type: inline-size; }
 .gift__tray { width: 100%; max-width: 300px; margin: 0 auto; }
 .gift__tagline {
   position: absolute;
   top: 43%;
   left: 47.5%;
   transform: translate(-50%, -50%);
-  font-family: 'Sybaris Opti', var(--font-script);
+  font-family: var(--font-script);
   color: var(--color-cream);
-  font-size: 2.4rem;
+  font-size: 1.9rem;
+  /* Symphony runs wide, so this is sized to fit inside the tray's gold
+     centre and shrinks with the tray on narrow phones. */
+  font-size: min(1.9rem, 8.8cqw);
   white-space: nowrap;
   z-index: 1;
 }
@@ -1232,7 +1227,7 @@ body.is-cover-open { overflow: hidden; }
   z-index: 1;
   flex: 0 0 auto;
   font-size: 2.4rem;
-  font-size: clamp(2.3rem, 13.5cqw, 3.4rem);
+  font-size: clamp(1.8rem, 12.8cqw, 3.4rem);
   font-weight: 400;
   color: #1a1a1a;
   margin: 0 0 1.25rem;
@@ -1412,7 +1407,7 @@ h3.ribbon-heading {
   margin: 0 0 0.6rem;
 }
 .thanks__sub {
-  font-family: 'Sybaris Opti', var(--font-script);
+  font-family: var(--font-script);
   color: var(--color-green);
   font-size: 8cqw;
   line-height: 1.25;

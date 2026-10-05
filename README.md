@@ -61,5 +61,5 @@ The "Send a Gift" button reveals a short note asking guests to contact the coupl
 
 - Colors, type pairing, section order, and copy were taken directly from the live Canva site.
 - Photos, florals, frames, and decorative elements were downloaded from the live site; the toile background pattern and the dark green plaque texture were swapped for the higher-resolution versions supplied locally in `Asset/`.
-- Fonts are Sloop Script (script headings) and Times New Roman (body and labels), matching the couple's chosen typefaces. Sloop Script is bundled locally at `public/assets/fonts/`.
+- Fonts are Symphony (script headings) and Times New Roman (body and labels), matching the couple's chosen typefaces. Symphony is bundled locally at `public/assets/fonts/`.
 - Images below the first screen are lazy-loaded (`loading="lazy"`).
