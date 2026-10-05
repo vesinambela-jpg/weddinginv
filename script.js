@@ -435,6 +435,7 @@
 
     retryBtn.addEventListener('click', verify);
     openBtn.addEventListener('click', function () {
+      startMusic();
       window.scrollTo(0, 0);
       document.body.classList.remove('is-cover-open');
       cover.classList.add('is-opened');
@@ -442,6 +443,48 @@
     });
 
     verify();
+  }
+
+  // Background song. Has to start inside the Open tap, since browsers
+  // block sound that starts without one. The floating button pauses and
+  // resumes it, and it pauses while the tab is in the background.
+  var music = document.getElementById('bgMusic');
+  var musicToggle = document.getElementById('musicToggle');
+  var musicWanted = false;
+
+  function setMusicButton(playing) {
+    if (!musicToggle) return;
+    musicToggle.classList.toggle('is-paused', !playing);
+    musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    musicToggle.setAttribute('aria-label', playing ? 'Pause music' : 'Play music');
+  }
+
+  function playMusic() {
+    var attempt = music.play();
+    if (attempt && attempt.catch) {
+      attempt.catch(function () { musicWanted = false; setMusicButton(false); });
+    }
+  }
+
+  function startMusic() {
+    if (!music || !musicToggle) return;
+    musicWanted = true;
+    musicToggle.hidden = false;
+    setMusicButton(true);
+    playMusic();
+  }
+
+  function initMusic() {
+    if (!music || !musicToggle) return;
+    musicToggle.addEventListener('click', function () {
+      musicWanted = music.paused;
+      if (musicWanted) playMusic(); else music.pause();
+      setMusicButton(musicWanted);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) music.pause();
+      else if (musicWanted) playMusic();
+    });
   }
 
   function initCountdown() {
@@ -482,6 +525,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initCover();
+    initMusic();
     loadWishesFromSheet();
     initRsvpForm();
     initGiftModal();

@@ -1354,6 +1354,41 @@ h3.ribbon-heading {
 }
 
 /* ============================================================
+   Music toggle
+============================================================ */
+
+/* Floating play/pause for the background song, shown once the cover is
+   opened. Spins gently while the music plays. */
+.music-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 90;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-green);
+  color: var(--color-cream);
+  box-shadow: 0 4px 12px rgba(30, 30, 20, 0.3);
+  cursor: pointer;
+}
+.music-toggle[hidden] { display: none; }
+.music-toggle__icon { width: 1.25rem; height: 1.25rem; }
+.music-toggle__icon--off,
+.music-toggle.is-paused .music-toggle__icon--on { display: none; }
+.music-toggle.is-paused .music-toggle__icon--off { display: block; }
+.music-toggle:not(.is-paused) { animation: music-spin 6s linear infinite; }
+@keyframes music-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .music-toggle:not(.is-paused) { animation: none; }
+}
+
+/* ============================================================
    Thank you / footer
 ============================================================ */
 

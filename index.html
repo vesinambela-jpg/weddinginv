@@ -422,6 +422,14 @@
   </div>
 </div>
 
+<!-- ===================== MUSIC ===================== -->
+<!-- Starts when the guest taps Open (browsers only allow sound after a tap). -->
+<audio id="bgMusic" src="public/assets/music.m4a" preload="none" loop></audio>
+<button class="music-toggle" type="button" id="musicToggle" aria-label="Pause music" aria-pressed="true" hidden>
+  <svg class="music-toggle__icon music-toggle__icon--on" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/></svg>
+  <svg class="music-toggle__icon music-toggle__icon--off" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="18" cy="16" r="3" fill="currentColor"/><path d="M3 3l18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</button>
+
 <script src="script.js"></script>
 </body>
 </html>
