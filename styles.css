@@ -11,6 +11,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Sybaris Opti';
+  src: url('public/assets/fonts/sybaris-opti.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-bg: #E7E2D5;
   --color-green: #2F4743;
@@ -726,7 +734,7 @@ body.is-cover-open { overflow: hidden; }
   top: 50%;
   left: 47.5%;
   transform: translate(-50%, -50%);
-  font-family: var(--font-script);
+  font-family: 'Sybaris Opti', var(--font-script);
   color: var(--color-cream);
   font-size: 1.3rem;
   white-space: nowrap;
