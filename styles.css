@@ -736,7 +736,7 @@ body.is-cover-open { overflow: hidden; }
   transform: translate(-50%, -50%);
   font-family: 'Sybaris Opti', var(--font-script);
   color: var(--color-cream);
-  font-size: 1.3rem;
+  font-size: 1.75rem;
   white-space: nowrap;
   z-index: 1;
 }
@@ -1412,6 +1412,7 @@ h3.ribbon-heading {
   margin: 0 0 0.6rem;
 }
 .thanks__sub {
+  font-family: 'Sybaris Opti', var(--font-script);
   color: var(--color-green);
   font-size: 8cqw;
   line-height: 1.25;
