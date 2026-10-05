@@ -304,12 +304,16 @@ body.is-cover-open { overflow: hidden; }
 
 .intro {
   position: relative;
-  padding: 0 1.25rem 2rem;
+  padding: 0 0.5rem 2rem;
 }
 
+/* Everything inside sizes off the plaque's own width (cqw), so the
+   frames, names and text keep the same proportions on every phone instead
+   of fixed sizes squeezing the names past the edge on narrower screens. */
 .couple {
   position: relative;
   padding: 6rem 0.25rem 3.5rem;
+  container-type: inline-size;
 }
 
 .couple__intro {
@@ -317,10 +321,10 @@ body.is-cover-open { overflow: hidden; }
   z-index: 1;
   color: var(--color-text-on-green);
   text-align: center;
-  font-size: 1rem;
+  font-size: 4.2cqw;
   line-height: 1.45;
   margin: 0 0 2rem;
-  padding: 0 1rem;
+  padding: 0 6cqw;
 }
 
 .couple__plaque {
@@ -353,7 +357,7 @@ body.is-cover-open { overflow: hidden; }
   margin-bottom: 1.75rem;
 }
 .couple__person .pill--instagram {
-  font-size: 0.8rem;
+  font-size: 3.4cqw;
   padding: 0.6em 1.1em;
   gap: 0.4rem;
 }
@@ -371,7 +375,7 @@ body.is-cover-open { overflow: hidden; }
 .person-frame {
   position: relative;
   flex: 0 0 auto;
-  width: 12.5rem;
+  width: 50cqw;
   z-index: 2;
 }
 .person-frame img {
@@ -379,8 +383,8 @@ body.is-cover-open { overflow: hidden; }
   display: block;
   filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
 }
-.person-frame--bastian { margin-left: -1.5rem; }
-.person-frame--vero { margin-right: -1.5rem; }
+.person-frame--bastian { margin-left: -6cqw; }
+.person-frame--vero { margin-right: -6cqw; }
 
 .couple__person-body {
   flex: 1 1 auto;
@@ -390,13 +394,13 @@ body.is-cover-open { overflow: hidden; }
 
 .couple__name {
   font-family: var(--font-script);
-  font-size: 2.4rem;
+  font-size: 9cqw;
   line-height: 1.15;
   margin: 0 0 0.7rem;
 }
 
 .couple__parents {
-  font-size: 0.85rem;
+  font-size: 3.6cqw;
   line-height: 1.4;
   margin: 0 0 0.9rem;
 }
@@ -411,7 +415,7 @@ body.is-cover-open { overflow: hidden; }
   text-align: center;
   font-family: var(--font-script);
   color: var(--color-text-on-green);
-  font-size: 3rem;
+  font-size: 12.8cqw;
   margin: 0 0 1.75rem;
 }
 
@@ -453,7 +457,7 @@ body.is-cover-open { overflow: hidden; }
   color: var(--color-green);
   font-size: clamp(2.6rem, 11vw, 3.2rem);
   line-height: 1;
-  margin: 0 0 1rem;
+  margin: 0 0 0.1rem;
 }
 
 /* Height is set from script.js (the tallest of the three chapters),
@@ -1058,7 +1062,7 @@ body.is-cover-open { overflow: hidden; }
   line-height: 1;
   color: var(--color-green);
   margin: 0 0 0.35rem;
-  padding-top: 0.5rem;
+  padding-top: 0.3rem;
   font-weight: 500;
 }
 .rsvp__card h2 .script {
@@ -1095,7 +1099,7 @@ body.is-cover-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   gap: 0.12rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 /* The wishes field sits directly above the button, which wants a
    tighter, distinct gap rather than the general inter-field spacing. */
@@ -1168,8 +1172,8 @@ body.is-cover-open { overflow: hidden; }
 .rsvp__form button {
   flex: 0 0 auto;
   width: 100%;
-  font-size: var(--form-font-size);
-  padding: 0.28em 1.5em;
+  font-size: calc(var(--form-font-size) * 1.25);
+  padding: 0.42em 1.5em;
 }
 .rsvp__status {
   text-align: center;
@@ -1287,6 +1291,25 @@ body.is-cover-open { overflow: hidden; }
   color: var(--color-green);
   margin: 0 0 1.1rem;
   padding: 0 1.25rem;
+}
+
+/* Section title set on the ribbon artwork. The ribbon's flat band sits
+   left of centre (its curled ends hang off the left-bottom and right-top),
+   so the text is nudged left with extra right padding to land on the band. */
+h2.ribbon-heading,
+h3.ribbon-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(88%, 340px);
+  aspect-ratio: 800 / 366;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 9% 0 0;
+  background: url('public/assets/ribbon.webp') center / 100% 100% no-repeat;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
 }
 /* A horizontally scrolling strip, not a grid: each photo keeps its own
    natural orientation (portrait or landscape) at a shared height rather
