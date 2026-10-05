@@ -43,7 +43,7 @@
 
 var SHEET_ID = '1pgBfO1wzzEwrGjp_V7Dp0XEqnYob4JD5sDdEzbSs6E0';
 var HEADERS = ['Timestamp', 'Name', 'Attending', 'Guests', 'Wishes'];
-var SITE_URL = 'https://weddinginv-nu.vercel.app/';
+var SITE_URL = 'https://www.bastianvero.online/';
 var GUEST_TAB = 'List undangan'; // guest names in column A, from row 2
 var SECRET_KEY = 'LINK_SECRET';
 
