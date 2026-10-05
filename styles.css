@@ -394,7 +394,7 @@ body.is-cover-open { overflow: hidden; }
 
 .couple__name {
   font-family: var(--font-script);
-  font-size: 10.5cqw;
+  font-size: 10cqw;
   line-height: 1.15;
   margin: 0 0 0.7rem;
 }
@@ -1294,18 +1294,18 @@ body.is-cover-open { overflow: hidden; }
 }
 
 /* Section title set on the ribbon artwork. The ribbon's flat band sits
-   left of centre (its curled ends hang off the left-bottom and right-top),
-   so the text is nudged left with extra right padding to land on the band. */
+   right of centre (the wider curl is on the left), so the text is nudged
+   right with extra left padding to land on the band. */
 h2.ribbon-heading,
 h3.ribbon-heading {
   display: flex;
   align-items: center;
   justify-content: center;
   width: min(88%, 340px);
-  aspect-ratio: 800 / 366;
+  aspect-ratio: 800 / 360;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 9% 0 0;
+  padding: 0 0 0 8%;
   background: url('public/assets/ribbon.webp') center / 100% 100% no-repeat;
   color: #fff;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
