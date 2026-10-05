@@ -919,12 +919,11 @@ body.is-cover-open { overflow: hidden; }
   margin-bottom: 1rem;
 }
 .bank-card:last-child { margin-bottom: 0; }
-.bank-card__bank {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-green);
-  margin: 0 0 0.35rem;
+.bank-card__logo {
+  display: block;
+  width: auto;
+  height: 1.6rem;
+  margin: 0 auto 0.6rem;
 }
 .bank-card__number {
   font-size: 1.25rem;
