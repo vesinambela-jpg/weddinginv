@@ -470,6 +470,13 @@ body.is-cover-open { overflow: hidden; }
   margin: 0 auto 1.25rem;
 }
 
+/* Very short screens (e.g. iPhone SE 1st gen): trim the spacing so the
+   longest chapter still fits on one screen while pinned. */
+@media (max-height: 600px) {
+  .story__pin { padding-top: calc(1rem + 2vh); padding-bottom: 1rem; }
+  .story__chapters { margin-bottom: 0.75rem; }
+}
+
 /* top/left/right only (no `bottom`): with `bottom` set too, a child
    would stretch to match this container's height, but that height is
    itself auto (derived from the tallest child) — a circular dependency
