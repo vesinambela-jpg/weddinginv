@@ -169,6 +169,7 @@ body.is-cover-open { overflow: hidden; }
 .cover__open[hidden] { display: none; }
 .cover__open:hover { background: #DD6A1A; }
 .cover__open:active { transform: translateY(1px); }
+.cover__open:disabled { cursor: progress; opacity: 0.85; }
 .cover__open:focus-visible { outline: 2px solid var(--color-green); outline-offset: 3px; }
 
 /* "Opening your invitation…" while the link is checked, or the message

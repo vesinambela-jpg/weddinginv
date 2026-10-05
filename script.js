@@ -408,12 +408,35 @@
       openBtn.hidden = false;
     }
 
-    function verify() {
-      if (!name || !code || !GOOGLE_SHEET_SCRIPT_URL) {
-        showStatus('Sorry, this invitation link isn\u2019t valid. Please open the exact link that was sent to you.', false);
-        return;
-      }
-      showStatus('Opening your invitation\u2026', false);
+    var INVALID = 'Sorry, this invitation link isn\u2019t valid. Please open the exact link that was sent to you.';
+    var OFFLINE = 'We couldn\u2019t open your invitation just now. Please check your connection and try again.';
+    var OPEN_LABEL = openBtn.textContent;
+    // 'pending' | 'ok' | 'invalid' | 'error'
+    var state = 'pending';
+    // The guest tapped Open before the check came back.
+    var openRequested = false;
+
+    function openInvitation() {
+      window.scrollTo(0, 0);
+      document.body.classList.remove('is-cover-open');
+      cover.classList.add('is-opened');
+      cover.setAttribute('aria-hidden', 'true');
+    }
+
+    function setOpenWaiting(waiting) {
+      openBtn.disabled = waiting;
+      openBtn.textContent = waiting ? 'Opening\u2026' : OPEN_LABEL;
+    }
+
+    function fail(message, canRetry) {
+      openRequested = false;
+      setOpenWaiting(false);
+      stopMusic();
+      showStatus(message, canRetry);
+    }
+
+    function check() {
+      state = 'pending';
       var url = GOOGLE_SHEET_SCRIPT_URL + '?action=verify&to=' + encodeURIComponent(name) +
         '&k=' + encodeURIComponent(code);
       fetch(url)
@@ -423,26 +446,55 @@
         })
         .then(function (result) {
           if (result && result.ok) {
-            welcome(result.name || name);
+            state = 'ok';
+            if (result.name && result.name !== name) welcome(result.name);
+            if (openRequested) openInvitation();
           } else {
-            showStatus('Sorry, this invitation link isn\u2019t valid. Please open the exact link that was sent to you.', false);
+            state = 'invalid';
+            fail(INVALID, false);
           }
         })
         .catch(function () {
-          showStatus('We couldn\u2019t open your invitation just now. Please check your connection and try again.', true);
+          state = 'error';
+          // Stay quiet unless the guest is already waiting on it; a tap on
+          // Open retries.
+          if (openRequested) fail(OFFLINE, true);
         });
     }
 
-    retryBtn.addEventListener('click', verify);
-    openBtn.addEventListener('click', function () {
-      startMusic();
-      window.scrollTo(0, 0);
-      document.body.classList.remove('is-cover-open');
-      cover.classList.add('is-opened');
-      cover.setAttribute('aria-hidden', 'true');
-    });
+    if (!name || !code || !GOOGLE_SHEET_SCRIPT_URL) {
+      showStatus(INVALID, false);
+      return;
+    }
 
-    verify();
+    // The Apps Script check takes a couple of seconds (much longer when it
+    // has been idle), so greet the guest straight away and check in the
+    // background. Open only goes through once the link is confirmed; tapping
+    // it earlier just waits for the answer.
+    welcome(name);
+    check();
+
+    openBtn.addEventListener('click', function () {
+      // Start the song inside this tap (browsers block it later); it's
+      // stopped again if the link turns out to be invalid.
+      startMusic();
+      if (state === 'ok') {
+        openInvitation();
+        return;
+      }
+      openRequested = true;
+      setOpenWaiting(true);
+      if (state === 'error') check();
+    });
+    retryBtn.addEventListener('click', function () {
+      status.hidden = true;
+      retryBtn.hidden = true;
+      greeting.hidden = false;
+      openBtn.hidden = false;
+      openRequested = true;
+      setOpenWaiting(true);
+      check();
+    });
   }
 
   // Background song. Has to start inside the Open tap, since browsers
@@ -472,6 +524,13 @@
     musicToggle.hidden = false;
     setMusicButton(true);
     playMusic();
+  }
+
+  function stopMusic() {
+    if (!music || !musicToggle) return;
+    musicWanted = false;
+    music.pause();
+    musicToggle.hidden = true;
   }
 
   function initMusic() {
