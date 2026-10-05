@@ -731,12 +731,12 @@ body.is-cover-open { overflow: hidden; }
 .gift__tray { width: 100%; max-width: 300px; margin: 0 auto; }
 .gift__tagline {
   position: absolute;
-  top: 50%;
+  top: 43%;
   left: 47.5%;
   transform: translate(-50%, -50%);
   font-family: 'Sybaris Opti', var(--font-script);
   color: var(--color-cream);
-  font-size: 1.75rem;
+  font-size: 2.4rem;
   white-space: nowrap;
   z-index: 1;
 }
