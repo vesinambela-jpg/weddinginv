@@ -354,7 +354,10 @@ body.is-cover-open { overflow: hidden; }
   z-index: 1;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 1.5cqw;
+  /* The plaque artwork's gold inner border sits ~8% in from each edge, so
+     frames and text stay within 10%-90% of the width to clear it. */
+  padding: 0 10cqw;
   margin-bottom: 1.75rem;
 }
 .couple__person .pill--instagram {
@@ -376,7 +379,7 @@ body.is-cover-open { overflow: hidden; }
 .person-frame {
   position: relative;
   flex: 0 0 auto;
-  width: 50cqw;
+  width: 38cqw;
   z-index: 2;
 }
 .person-frame img {
