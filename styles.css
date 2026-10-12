@@ -356,12 +356,13 @@ body.is-cover-open { overflow: hidden; }
   align-items: center;
   gap: 1.5cqw;
   /* The plaque artwork's gold inner border sits ~8% in from each edge, so
-     frames and text stay within 10%-90% of the width to clear it. */
-  padding: 0 10cqw;
+     frames and text stay well inside it (iOS renders the script names
+     ~8% wider than desktop Chrome, hence the extra room on the name side). */
+  padding: 0 11cqw 0 9cqw;
   margin-bottom: 1.75rem;
 }
 .couple__person .pill--instagram {
-  font-size: 3.4cqw;
+  font-size: 3.1cqw;
   padding: 0.6em 1.1em;
   gap: 0.4rem;
 }
@@ -373,13 +374,15 @@ body.is-cover-open { overflow: hidden; }
 .couple__person--reverse {
   flex-direction: row-reverse;
   text-align: right;
+  /* Sits a little left of centre so the frame clears the right border. */
+  padding: 0 13cqw 0 9cqw;
   margin-top: -1rem;
 }
 
 .person-frame {
   position: relative;
   flex: 0 0 auto;
-  width: 38cqw;
+  width: 43cqw;
   z-index: 2;
 }
 .person-frame img {
@@ -398,7 +401,7 @@ body.is-cover-open { overflow: hidden; }
 
 .couple__name {
   font-family: var(--font-script);
-  font-size: 10cqw;
+  font-size: 8cqw;
   line-height: 1.15;
   margin: 0 0 0.7rem;
 }
