@@ -314,8 +314,10 @@ body.is-cover-open { overflow: hidden; }
 .couple {
   position: relative;
   /* Bottom padding clears the plaque's bottom piece (its border curves in
-     over roughly the last 20% of the width in height). */
-  padding: 6rem 0.25rem 25cqw;
+     over roughly the last 20% of the width in height). A % rather than
+     cqw: an element can't size its own padding off its own container, so
+     cqw here fell back to the viewport and grew huge on desktop. */
+  padding: 6rem 0.25rem 25%;
   container-type: inline-size;
 }
 
