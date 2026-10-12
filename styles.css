@@ -313,7 +313,9 @@ body.is-cover-open { overflow: hidden; }
    of fixed sizes squeezing the names past the edge on narrower screens. */
 .couple {
   position: relative;
-  padding: 6rem 0.25rem 3.5rem;
+  /* Bottom padding clears the plaque's bottom piece (its border curves in
+     over roughly the last 20% of the width in height). */
+  padding: 6rem 0.25rem 25cqw;
   container-type: inline-size;
 }
 
@@ -343,8 +345,13 @@ body.is-cover-open { overflow: hidden; }
 }
 .couple__plaque-mid {
   width: 100%;
-  height: 100%;
-  flex: 1 1 auto;
+  /* Fills whatever is left between the top and bottom pieces. A zero basis
+     and min-height 0 matter for Safari: with height 100% / min-height auto
+     it keeps the image at full height and pushes the bottom piece out of
+     the plaque, where the next section covers it. */
+  height: auto;
+  min-height: 0;
+  flex: 1 1 0;
   object-fit: fill;
   display: block;
 }
