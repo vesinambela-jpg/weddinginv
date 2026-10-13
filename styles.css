@@ -515,7 +515,7 @@ body.is-cover-open { overflow: hidden; }
 .story__chapter-title {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   letter-spacing: 0.02em;
   color: var(--color-green);
   margin: 0 0 0.5rem;
@@ -523,7 +523,7 @@ body.is-cover-open { overflow: hidden; }
 
 .story__chapter-text {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: 0.85rem;
   line-height: 1.45;
   color: var(--color-text);
   margin: 0;
