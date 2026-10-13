@@ -1256,7 +1256,7 @@ body.is-cover-open { overflow: hidden; }
   font-size: 2.4rem;
   font-size: clamp(1.8rem, 12.8cqw, 3.4rem);
   font-weight: 400;
-  color: #1a1a1a;
+  color: var(--color-green);
   margin: 0 0 1.25rem;
   white-space: nowrap;
 }
