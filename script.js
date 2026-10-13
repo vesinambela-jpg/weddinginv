@@ -89,7 +89,16 @@
     var form = document.getElementById('rsvpForm');
     if (!form) return;
     var status = document.getElementById('rsvpStatus');
+    var done = document.getElementById('rsvpDone');
+    var again = document.getElementById('rsvpAgain');
     var guestsField = document.getElementById('rsvpGuestsField');
+
+    if (again) {
+      again.addEventListener('click', function () {
+        done.hidden = true;
+        form.hidden = false;
+      });
+    }
 
     // "Number of guests" only applies to guests who are coming.
     function syncGuests() {
@@ -153,11 +162,14 @@
       // Reset clears the locked name from the guest's link; put it back.
       if (form.name.readOnly) form.name.value = form.name.defaultValue = name;
       syncGuests();
-      if (status) {
-        status.hidden = false;
+      if (status && done) {
         status.textContent = attend === 'yes'
           ? 'Thank you, ' + name + '! We can\'t wait to celebrate with you.'
           : 'Thank you, ' + name + '. We\'ll miss you, but we appreciate your wishes.';
+        // Show the thanks in the form's place; there's no room for it below
+        // the button inside the envelope card.
+        form.hidden = true;
+        done.hidden = false;
       }
     });
   }

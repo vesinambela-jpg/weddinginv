@@ -1205,11 +1205,30 @@ body.is-cover-open { overflow: hidden; }
   font-size: calc(var(--form-font-size) * 1.25);
   padding: 0.42em 1.5em;
 }
-.rsvp__status {
+.rsvp__form[hidden],
+.rsvp__done[hidden] { display: none; }
+.rsvp__done {
+  width: 86%;
+  margin: 0 auto;
+  padding-top: 1.5rem;
   text-align: center;
-  margin: 0.5rem 0 0;
-  font-size: var(--form-font-size);
+}
+.rsvp__status {
+  margin: 0 0 1rem;
+  font-size: calc(var(--form-font-size) * 1.35);
+  line-height: 1.45;
   color: var(--color-green);
+}
+.rsvp__again {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: var(--font-serif);
+  font-size: var(--form-font-size);
+  color: var(--color-gold-label);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
 }
 
 .wishes {

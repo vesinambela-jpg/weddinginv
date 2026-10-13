@@ -313,8 +313,13 @@
               </div>
 
               <button class="pill pill--gold" type="submit">RSVP</button>
-              <p class="rsvp__status" id="rsvpStatus" role="status" hidden></p>
             </form>
+            <!-- Takes the form's place after sending: below the button there's
+                 no room left inside the envelope card, so it would be cut off. -->
+            <div class="rsvp__done" id="rsvpDone" hidden>
+              <p class="rsvp__status" id="rsvpStatus" role="status"></p>
+              <button class="rsvp__again" type="button" id="rsvpAgain">Send another response</button>
+            </div>
           </div>
         </div>
 
