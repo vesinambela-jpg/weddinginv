@@ -487,11 +487,14 @@ body.is-cover-open { overflow: hidden; }
   margin: 0 auto 1.25rem;
 }
 
-/* Very short screens (e.g. iPhone SE 1st gen): trim the spacing so the
+/* Short screens (e.g. iPhone SE, small Androids): trim the spacing so the
    longest chapter still fits on one screen while pinned. */
-@media (max-height: 600px) {
+@media (max-height: 700px) {
   .story__pin { padding-top: calc(1rem + 2vh); padding-bottom: 1rem; }
   .story__chapters { margin-bottom: 0.75rem; }
+}
+@media (max-height: 600px) {
+  .story__pin { padding-bottom: 0.2rem; }
 }
 
 /* top/left/right only (no `bottom`): with `bottom` set too, a child
@@ -520,7 +523,7 @@ body.is-cover-open { overflow: hidden; }
 
 .story__chapter-text {
   font-family: var(--font-serif);
-  font-size: 0.85rem;
+  font-size: 1rem;
   line-height: 1.45;
   color: var(--color-text);
   margin: 0;
