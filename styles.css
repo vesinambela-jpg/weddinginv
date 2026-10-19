@@ -840,34 +840,42 @@ body.is-cover-open { overflow: hidden; }
 
 .gift__plaque {
   position: relative;
-  width: 94%;
-  max-width: 380px;
+  width: 100%;
+  max-width: 430px;
   margin: 3rem auto 0;
+  /* The text inside sizes off the plaque's own width (cqw), so it keeps the
+     same proportions inside the dotted oval at every screen size. */
+  container-type: inline-size;
 }
 .gift__plaque-bg { width: 100%; }
+/* The box between the gift icon and the narrowing bottom of the dotted
+   oval (the oval's centre sits slightly left of the image's). */
 .gift__plaque-content {
   position: absolute;
   top: 24%;
-  left: 10%;
-  width: 76%;
-  height: 42%;
+  left: 16%;
+  width: 66%;
+  height: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: var(--color-text-on-green);
-  padding: 0 0.5rem;
 }
 .gift__title {
   font-family: var(--font-script);
-  font-size: 2.6rem;
-  margin: 0 0 0.85rem;
-  transform: translateX(-0.35rem);
+  font-size: 11.5cqw;
+  line-height: 1.2;
+  margin: 0 0 3cqw;
 }
 .gift__desc {
-  font-size: 0.92rem;
+  font-size: 3.9cqw;
   line-height: 1.5;
-  margin: 0 0 1.25rem;
+  margin: 0 0 4.5cqw;
+}
+.gift__plaque .pill {
+  font-size: 3.8cqw;
+  padding: 0.65em 1.6em;
 }
 /* ============================================================
    Gift modal
