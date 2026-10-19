@@ -433,6 +433,7 @@
       document.body.classList.remove('is-cover-open');
       cover.classList.add('is-opened');
       cover.setAttribute('aria-hidden', 'true');
+      startReveal();
     }
 
     function setOpenWaiting(waiting) {
@@ -594,7 +595,53 @@
     setInterval(tick, 1000);
   }
 
+  // Text fades and rises into place as each part of the page scrolls into
+  // view. Our Story is left out: it has its own pinned chapter animation.
+  // Elements are tagged up front (hidden by CSS), but watching only starts
+  // once the cover is opened, so the top of the page animates in front of
+  // the guest rather than behind the cover.
+  var REVEAL_SELECTOR = [
+    '.hero__title', '.hero-panel__text > *',
+    '.couple__intro', '.couple__name', '.couple__parents', '.couple .pill', '.couple__divider',
+    '.event-card__eyebrow', '.event-card__date', '.event-card__info > *', '.event-card .pill',
+    '.gift__countdown', '.gift__tagline', '.gift__title', '.gift__desc', '.gift__plaque .pill',
+    '.verse__text', '.verse__ref',
+    '.rsvp__card > h2', '.rsvp__card > p',
+    '.wishes h3', '.gallery h3',
+    '.thanks__title', '.thanks__sub', '.thanks__credit'
+  ].join(',');
+  var revealStarted = false;
+
+  function initReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    Array.prototype.forEach.call(document.querySelectorAll(REVEAL_SELECTOR), function (el) {
+      if (!el.closest('.story')) el.classList.add('reveal');
+    });
+    // No cover on this page: nothing to wait for.
+    if (!document.getElementById('cover')) startReveal();
+  }
+
+  function startReveal() {
+    if (revealStarted) return;
+    revealStarted = true;
+    var items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+    var observer = new IntersectionObserver(function (entries) {
+      // Stagger the ones that arrive together so they read top to bottom.
+      var shown = 0;
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.style.transitionDelay = (shown++ * 0.12) + 's';
+        entry.target.classList.add('is-in');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+    Array.prototype.forEach.call(items, function (el) { observer.observe(el); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    initReveal();
     initCover();
     initMusic();
     loadWishesFromSheet();

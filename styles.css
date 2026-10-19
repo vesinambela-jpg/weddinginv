@@ -1400,6 +1400,21 @@ h3.ribbon-heading {
 }
 
 /* ============================================================
+   Scroll reveal (tagged by script.js; not used in Our Story)
+============================================================ */
+
+/* Uses the standalone `translate` property so it stacks with any
+   `transform` an element already has (e.g. the centred countdown tagline).
+   Hidden only until revealed; after that the element's own opacity applies. */
+.reveal {
+  transition: opacity 0.8s ease, translate 0.8s ease;
+}
+.reveal:not(.is-in) {
+  opacity: 0;
+  translate: 0 1.1rem;
+}
+
+/* ============================================================
    Music toggle
 ============================================================ */
 
