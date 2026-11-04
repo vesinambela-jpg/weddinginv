@@ -122,6 +122,8 @@
         attend: attend,
         guests: guests,
         message: message,
+        // Guest-list name from their personal link, unchanged by edits above.
+        invitedAs: form.getAttribute('data-invited-as') || '',
         at: Date.now()
       };
 
@@ -159,8 +161,8 @@
       }
 
       form.reset();
-      // Reset clears the locked name from the guest's link; put it back.
-      if (form.name.readOnly) form.name.value = form.name.defaultValue = name;
+      // Keep the name they used, for "Send another response".
+      form.name.value = name;
       syncGuests();
       if (status && done) {
         status.textContent = attend === 'yes'
@@ -406,13 +408,13 @@
 
     function welcome(guestName) {
       document.getElementById('coverGuest').textContent = guestName;
-      // Pre-fill the RSVP name with the exact name from the guest list, so
-      // RSVP rows match the "List undangan" tab (its Attend? lookup).
-      // It's locked (read-only) so the RSVP always matches the invited guest.
+      // Pre-fill the RSVP name from the guest list. Guests may edit it, so
+      // the exact guest-list name is also sent with the RSVP ("Invited as"),
+      // which is what the "List undangan" tab's Attend? lookup matches on.
       var rsvpName = document.getElementById('rsvpName');
       if (rsvpName) {
         rsvpName.value = rsvpName.defaultValue = guestName;
-        rsvpName.readOnly = true;
+        rsvpName.form.setAttribute('data-invited-as', guestName);
       }
       status.hidden = true;
       retryBtn.hidden = true;

@@ -36,13 +36,15 @@
  *    link already sent, so only do that if links have leaked.
  *
  * Every RSVP submission appends a row (Timestamp, Name, Attending, Guests,
- * Wishes) to the first tab of the sheet below. The site also calls this
+ * Wishes, Invited as) to the first tab of the sheet below. "Name" is what the
+ * guest typed; "Invited as" is the exact name from their personal link, for
+ * matching against the "List undangan" tab. The site also calls this
  * script with a GET request to read all wishes back for the "Wishes from
  * loved ones" section, so every visitor sees every submitted wish.
  */
 
 var SHEET_ID = '1pgBfO1wzzEwrGjp_V7Dp0XEqnYob4JD5sDdEzbSs6E0';
-var HEADERS = ['Timestamp', 'Name', 'Attending', 'Guests', 'Wishes'];
+var HEADERS = ['Timestamp', 'Name', 'Attending', 'Guests', 'Wishes', 'Invited as'];
 var SITE_URL = 'https://www.bastianvero.online/';
 var GUEST_TAB = 'List undangan'; // guest names in column A, from row 2
 var SECRET_KEY = 'LINK_SECRET';
@@ -103,6 +105,9 @@ function getSheet_() {
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
+  } else if (!sheet.getRange(1, HEADERS.length).getValue()) {
+    // Sheets made before the "Invited as" column existed.
+    sheet.getRange(1, HEADERS.length).setValue(HEADERS[HEADERS.length - 1]);
   }
   return sheet;
 }
@@ -139,7 +144,8 @@ function doPost(e) {
       clean_(data.name, 100),
       data.attend === 'yes' ? 'Yes' : 'No',
       clean_(data.guests, 3),
-      clean_(data.message, 1000)
+      clean_(data.message, 1000),
+      clean_(data.invitedAs, 100)
     ]);
   } finally {
     lock.releaseLock();
