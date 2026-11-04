@@ -409,11 +409,9 @@
       // Pre-fill the RSVP name with the exact name from the guest list, so
       // RSVP rows match the "List undangan" tab (its Attend? lookup).
       // It's locked (read-only) so the RSVP always matches the invited guest.
-      // Invitations for couples are listed as "Name & partner"; the RSVP
-      // only needs the guest's own name.
       var rsvpName = document.getElementById('rsvpName');
       if (rsvpName) {
-        rsvpName.value = rsvpName.defaultValue = guestName.replace(/\s*(?:&|\+|and)\s*partner\s*$/i, '');
+        rsvpName.value = rsvpName.defaultValue = guestName;
         rsvpName.readOnly = true;
       }
       status.hidden = true;
