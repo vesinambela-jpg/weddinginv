@@ -1399,6 +1399,21 @@ h3.ribbon-heading {
   outline-offset: 3px;
 }
 
+/* Prewedding video under the photo strip, matching the photos' rounded
+   corners and shadow. */
+.gallery__video {
+  margin: 1rem 1.25rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(20, 26, 20, 0.16);
+  background: #000;
+}
+.gallery__video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
 /* ============================================================
    Scroll reveal (tagged by script.js; not used in Our Story)
 ============================================================ */

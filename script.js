@@ -548,6 +548,27 @@
     musicToggle.hidden = true;
   }
 
+  // The background song pauses while the prewedding video plays, and picks
+  // up again when the video is paused or ends.
+  function initVideoMusic() {
+    var video = document.getElementById('preweddingVideo');
+    if (!video || !music) return;
+    var resumeAfter = false;
+    video.addEventListener('play', function () {
+      resumeAfter = musicWanted && !music.paused;
+      if (resumeAfter) { musicWanted = false; music.pause(); setMusicButton(false); }
+    });
+    function resume() {
+      if (!resumeAfter) return;
+      resumeAfter = false;
+      musicWanted = true;
+      setMusicButton(true);
+      playMusic();
+    }
+    video.addEventListener('pause', resume);
+    video.addEventListener('ended', resume);
+  }
+
   function initMusic() {
     if (!music || !musicToggle) return;
     musicToggle.addEventListener('click', function () {
@@ -646,6 +667,7 @@
     initReveal();
     initCover();
     initMusic();
+    initVideoMusic();
     loadWishesFromSheet();
     initRsvpForm();
     initGiftModal();
